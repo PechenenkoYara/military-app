@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}{% endblock %}</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+  <style>
+    /* Add font files for Kharkiv Tone */
+    @font-face {
+      font-family: 'Kharkiv Tone';
+      src: url('{{ url_for("static", filename="fonts/kharkiv-tone.woff2") }}') format('woff2'),
+           url('{{ url_for("static", filename="fonts/kharkiv-tone.woff") }}') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+    :root {
+      --font-family-kharkiv-tone: 'Kharkiv Tone', sans-serif;
+      --font-family-roboto: 'Roboto', sans-serif;
+      --text-rgb-53-88-26: rgba(53, 88, 26, 1);
+      --text-black: rgba(0, 0, 0, 1);
+      --text-white: rgba(255, 255, 255, 1);
+      --text-rgb-114-114-114: rgba(114, 114, 114, 1);
+    }
+    
+    .text-rgb-53-88-26 {
+      color: var(--text-rgb-53-88-26);
+    }
+    
+    .text-black {
+      color: var(--text-black);
+    }
+    
+    .text-white {
+      color: var(--text-white);
+    }
+    
+    .text-rgb-114-114-114 {
+      color: var(--text-rgb-114-114-114);
+    }
+    
+    /* CSS Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      width: 100%;
+      min-height: 100vh;
+      overflow-x: hidden;
+      font-family: var(--font-family-roboto);
+    }
+    
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+    
+    .text-5 {
+      flex-grow: 0;
+      flex-shrink: 1;
+      flex-basis: auto;
+      font-family: var(--font-family-kharkiv-tone);
+      font-weight: normal;
+      font-size: 64px;
+      text-decoration: none;
+      text-transform: none;
+      color: var(--text-rgb-53-88-26);
+      margin-bottom: 10px;
+    }
+    
+    .text-6 {
+      flex-grow: 0;
+      flex-shrink: 1;
+      flex-basis: auto;
+      font-family: var(--font-family-roboto);
+      font-weight: normal;
+      font-size: 24px;
+      letter-spacing: 1.7000000476837158px;
+      line-height: 24px;
+      text-decoration: none;
+      text-transform: none;
+      color: var(--text-black);
+      text-align: center;
+      max-width: 400px;
+      margin-bottom: 20px;
+    }
+    
+    .text-8 {
+      flex-grow: 0;
+      flex-shrink: 1;
+      flex-basis: auto;
+      font-family: var(--font-family-roboto);
+      font-weight: normal;
+      font-size: 30px;
+      text-decoration: none;
+      text-transform: none;
+      color: var(--text-white);
+    }
+    
+    .frame-5-7 {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      padding: 7px 36px 7px 36px;
+      flex-grow: 0;
+      flex-shrink: 1;
+      flex-basis: auto;
+      background-color: rgba(53, 88, 26, 1);
+      cursor: pointer;
+      transition: background-color 0.3s;
+      text-decoration: none;
+    }
+    
+    .frame-5-7:hover {
+      background-color: rgba(63, 108, 36, 1);
+    }
+    
+    .frame-4-4 {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 20px;
+      padding: 0px;
+      flex-grow: 0;
+      flex-shrink: 1;
+      width: 41.39492753623188%;
+    }
+    
+    .rectangle-6-12 {
+      flex-grow: 0;
+      flex-shrink: 1;
+      flex-basis: auto;
+      background-color: rgba(53, 88, 26, 1);
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+    
+    .text-14 {
+      flex-grow: 0;
+      flex-shrink: 1;
+      flex-basis: auto;
+      font-family: var(--font-family-kharkiv-tone);
+      font-weight: normal;
+      font-size: 64px;
+      text-decoration: none;
+      text-transform: none;
+      color: var(--text-white);
+      margin-bottom: 20px;
+    }
+    
+    .text-18, .text-20, .text-23, .text-25, .text-28 {
+      flex-grow: 0;
+      flex-shrink: 1;
+      flex-basis: auto;
+      font-family: var(--font-family-roboto);
+      font-weight: normal;
+      font-size: 24px;
+      text-decoration: none;
+      text-transform: none;
+      color: var(--text-rgb-114-114-114);
+    }
+    
+    .frame-4-17, .frame-4-19, .frame-4-22, .frame-3-24, .frame-4-27 {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 10px;
+      padding: 15px 24px;
+      flex-grow: 0;
+      flex-shrink: 1;
+      width: 100%;
+      background-color: rgba(238, 238, 238, 1);
+      border-radius: 5px;
+      margin-bottom: 15px;
+    }
+    
+    .input-field {
+      width: 100%;
+      padding: 15px 24px;
+      font-family: var(--font-family-roboto);
+      font-size: 24px;
+      border: none;
+      background-color: rgba(238, 238, 238, 1);
+      color: var(--text-black);
+      border-radius: 5px;
+      margin-bottom: 15px;
+    }
+    
+    .input-field::placeholder {
+      color: var(--text-rgb-114-114-114);
+    }
+    
+    .text-30 {
+      flex-grow: 0;
+      flex-shrink: 1;
+      flex-basis: auto;
+      font-family: var(--font-family-roboto);
+      font-weight: normal;
+      font-size: 30px;
+      text-decoration: none;
+      text-transform: none;
+      color: var(--text-black);
+    }
+    
+    .frame-5-29 {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      padding: 15px 36px;
+      flex-grow: 0;
+      flex-shrink: 1;
+      width: 100%;
+      background-color: rgba(255, 255, 255, 1);
+      border: 2px solid var(--text-black);
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    
+    .frame-5-29:hover {
+      background-color: rgba(240, 240, 240, 1);
+    }
+    
+    .frame-3-15 {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      padding: 0px;
+      flex-grow: 0;
+      flex-shrink: 1;
+      flex-basis: auto;
+      width: 100%;
+      max-width: 500px;
+    }
+    
+    .frame-3-13 {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 20px;
+      padding: 50px 30px;
+      flex-grow: 0;
+      flex-shrink: 1;
+      width: 100%;
+      position: relative;
+    }
+    
+    .frame-32-2 {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: stretch;
+      padding: 0px;
+      flex-grow: 0;
+      flex-shrink: 1;
+      width: 100%;
+      height: 100vh;
+    }
+    
+    .desktop-3-1 {
+      flex-grow: 0;
+      flex-shrink: 1;
+      flex-basis: auto;
+      background-color: rgba(255, 255, 255, 1);
+      width: 100%;
+      min-height: 100vh;
+    }
+    
+    .left-side {
+      width: 45%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    
+    .right-side {
+      width: 55%;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .alert {
+      padding: 10px;
+      border-radius: 5px;
+      width: 100%;
+      margin-bottom: 15px;
+      font-size: 16px;
+    }
+    
+    .alert-success {
+      background-color: rgba(76, 175, 80, 0.2);
+      color: rgba(39, 90, 41, 1);
+      border: 1px solid rgba(76, 175, 80, 0.5);
+    }
+    
+    .alert-error {
+      background-color: rgba(244, 67, 54, 0.2);
+      color: rgba(121, 33, 27, 1);
+      border: 1px solid rgba(244, 67, 54, 0.5);
+    }
+    
+    @media (max-width: 1024px) {
+      .frame-32-2 {
+        flex-direction: column;
+        height: auto;
+      }
+      
+      .left-side, .right-side {
+        width: 100%;
+        padding: 40px 20px;
+      }
+      
+      .frame-4-4 {
+        width: 100%;
+        max-width: 500px;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .text-5, .text-14 {
+        font-size: 48px;
+      }
+      
+      .text-6 {
+        font-size: 20px;
+      }
+      
+      .frame-3-13 {
+        padding: 30px 20px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .text-5, .text-14 {
+        font-size: 36px;
+      }
+      
+      .text-6 {
+        font-size: 18px;
+      }
+      
+      .input-field {
+        font-size: 18px;
+        padding: 12px 20px;
+      }
+    }
+  </style>
+  {% block head %}{% endblock %}
+</head>
+<body>
+  {% block content %}{% endblock %}
+  
+  {% block scripts %}{% endblock %}
+</body>
+</html>
