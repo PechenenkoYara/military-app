@@ -90,8 +90,8 @@
           <input type="text" name="last_name" class="input-field" placeholder="прізвище" required>
           <input type="text" name="occupation" class="input-field" placeholder="сфера діяльності">
           <input type="email" name="email" class="input-field" placeholder="email" required>
-          <input type="password" name="password" class="input-field" placeholder="пароль" required>
-          <input type="confirm_password" name="confirm_password" class="input-field" placeholder="підтвердження_пароль" required>
+          <input type="password" name="password1" class="input-field" placeholder="пароль" required>
+          <input type="password" name="password2" class="input-field" placeholder="підтвердження_пароль" required>
           
           {% with messages = get_flashed_messages(with_categories=true) %}
           {% if messages %}
