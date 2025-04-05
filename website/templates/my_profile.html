@@ -1,0 +1,116 @@
+
+{% extends "base_.html" %}
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<style>
+    .button-container {
+        display: flex;
+        margin-top: 5%;
+        justify-content: space-around;
+        width: 86%;
+        margin-left: auto;
+        margin-right: auto;
+        flex-grow: 1;
+        display: flex;
+        justify-content: center;
+    }
+
+    .small-button {
+        background: rgba(53, 88, 26, 1);
+        border-radius: 30px;
+        width: 110%;
+        padding: 15px 50px;
+        text-align: center;
+        line-height: normal;
+        font-size: 1em;
+        color: rgba(238, 238, 238, 1);
+        text-decoration: none;
+        display: inline-block;
+        box-sizing: border-box;
+    }
+
+    .small-button1 {
+        background: rgba(53, 88, 26, 1);
+        border-radius: 30px;
+        width: 95%;
+        padding: 11px 35px;
+        text-align: center;
+        line-height: normal;
+        font-size: 1em;
+        color: rgba(238, 238, 238, 1);
+        text-decoration: none;
+        display: inline-block;
+        box-sizing: border-box;
+    }
+
+    .upper_box {
+        width: 100%; 
+        background-color: rgba(238, 238, 238, 1); 
+        padding-bottom: 6%; 
+        margin-top: 0px; 
+        display: inline-block;
+    }
+
+    .t1 {
+        font-size: 185%; 
+        color: #000000; 
+        margin-top: 9%; 
+        margin-left: 5%; 
+        white-space: nowrap;
+    }
+
+    .t2 {
+        font-size: 100%; 
+        color: #000000; 
+        margin-top: -2%; 
+        margin-left: 5%; 
+        white-space: nowrap;
+    }
+
+    .t3 {
+        font-size: 100%; 
+        color: #000000; 
+        margin-top: 6%; 
+        margin-left: 5%; 
+        white-space: nowrap;
+    }
+</style>
+<div class="upper_box">
+    <div class="profile_contain">
+        <img src="{{ image_file }}">
+        <div>
+            <p class="t1">
+                {{ current_user.last_name }} {{ current_user.first_name }}/{{ current_user.occupation }}
+            </p>
+            <p class="t2"">
+                {{ current_user.email }}
+            </p>
+            <p class="t3">
+                Here are some notes `{{ current_user.notes }}` about me
+            </p>
+        </div>
+    </div>
+    <div style="display: flex; margin-top: 5%;">
+        <div class="button-container">
+            <div>
+                <a href="#" class="small-button">Мої контакти</a>
+            </div>
+            <div style="margin-left: 7%;">
+                <a href="#" class="small-button">Мої звіти</a>
+            </div>
+            <div style="margin-left: 7%;">
+                <a href="#" class="small-button">Про мене</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <div style="width: 100%; margin-left: 0px;">
+        <img src="/static/images/wish_for_great.png">
+    </div>
+    <div style="margin-left: 35%; width: 28%; margin-top: -16.5%;">
+        <a href="/" class="small-button1">Головна сторінка</a>
+    </div>
+</div>
+{% endblock %}
