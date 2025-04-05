@@ -3,9 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>волонтер_апка</title>
+  <title>свій до свого по своє</title>
   <link href="https://fonts.googleapis.com/css2?family=Mariupol&display=swap" rel="stylesheet">
   <style>
+    
+    @font-face {
+    font-family: 'Kharkiv Tone';
+    src: url('fonts/kharkiv-tone.woff2') format('woff2'),
+         url('fonts/kharkiv-tone.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+  :root {
+    --font-family-kharkiv-tone: 'Kharkiv Tone', sans-serif;
+    --font-family-roboto: 'Roboto', sans-serif;
+    --text-rgb-53-88-26: rgba(53, 88, 26, 1);
+    --text-black: rgba(0, 0, 0, 1);
+    --text-white: rgba(255, 255, 255, 1);
+    --text-rgb-114-114-114: rgba(114, 114, 114, 1);
+  }
+
     body {
       margin: 0;
       background: #EBEBEB;
@@ -20,16 +37,26 @@
     }
 
     .logo-text {
+      font-family: 'Kharkiv Tone', sans-serif;
       font-size: 30px;
       color: #1E1E1E;
+    }
+
+    .hero-wrapper {
+    background-image: url('static/images/photo_main.jpg'); /* шлях до зображення */
+    background-size: cover;
+    background-position: left;
+    padding: 150px 80px; /* щоб був відступ */
     }
 
     .hero {
       background: #35581A;
       color: white;
-      padding: 80px;
+      font-family: 'Kharkiv Tone', sans-serif;
+      padding: 100px 80px;
       border-top-right-radius: 30px;
       border-bottom-right-radius: 30px;
+      width: 80%; /* наприклад, 70% ширини */
     }
 
     .hero h1 {
@@ -86,6 +113,7 @@
       border-radius: 30px;
       width: 201px;
       height: 66px;
+      padding: 10px 30px;
       text-align: center;
       line-height: 66px;
       font-size: 30px;
@@ -120,14 +148,15 @@
 <body>
 
 <header>
-  <div class="logo-text">волонтер_апка</div>
+  <div class="logo-text">свій до свого по своє</div>
   <div>📞 0688888888</div>
 </header>
-
-<div class="hero">
-  <h1>Волонтери волонтерам</h1>
-  <h2>Великого бажайте!</h2>
-  <a href="#" class="button">моя сторінка</a>
+<div class="hero-wrapper">
+  <div class="hero">
+    <h1>Волонтери волонтерам</h1>
+    <h2>Великого бажайте!</h2>
+    <a href="#" class="button">моя сторінка</a>
+  </div>
 </div>
 
 <div class="section">
@@ -151,7 +180,7 @@
     <p>Ми студенти Українського католицького унівеситету, і ми прагнемо спростити життя волонтерам, отож будемо раді співпрацювати з вами!</p>
     <span>Допомагаймо Україні разом!</span>
   </div>
-  <img src="https://placehold.co/886x500" alt="Про нас">
+  <img src="/static/images/heart.jpg" class="ribbon" alt="Про нас">
 </div>
 
 <footer>
