@@ -29,5 +29,5 @@ def create_pdf():
 
     return send_file(pdf_output, as_attachment=True, download_name="report.pdf", mimetype='application/pdf')
 
-if __name__ == '__main__':
-    app.run(debug=True)
+# if __name__ == '__main__':
+#     app.run(debug=True)
