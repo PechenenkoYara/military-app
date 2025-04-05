@@ -60,4 +60,5 @@
     left: -50px;
     bottom: 20px;
     width: 70%;
+    z-index: -10;
 }
