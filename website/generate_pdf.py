@@ -8,8 +8,8 @@ app = Flask(__name__)
 def home():
     return render_template('our_home.html')
 
-@app.route('/create_pdf')
-def create_pdf_page():
+@app.route('/create_pdf_form')
+def create_pdf_form():
     return render_template('create_pdf.html')
 
 @app.route('/create_pdf', methods=['POST'])
