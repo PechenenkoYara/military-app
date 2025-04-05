@@ -13,7 +13,9 @@ def login():
     if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
-
+        if not email or not password:
+            flash("Будь ласка, заповніть всі поля", "error")
+            return redirect(url_for("auth.login"))
         user = User.query.filter_by(email=email).first()
         if user:
             if check_password_hash(user.password, password):
@@ -67,6 +69,7 @@ def sign_up():
     email=email, 
     first_name=first_name, 
     last_name=last_name, 
+    occupation=occupation,
     password=generate_password_hash(password1, method='pbkdf2:sha256')
 )
             db.session.add(new_user)
