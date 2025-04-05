@@ -7,6 +7,10 @@ from flask_login import login_user, login_required, logout_user, current_user
 
 auth = Blueprint('auth', __name__)
 
+@auth.route('/')
+def home_page():
+    return redirect(url_for('views.home'))
+
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
@@ -34,7 +38,6 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('auth.login'))
-
 
 @auth.route('/sign-up', methods=['GET', 'POST'])
 def sign_up():
@@ -75,6 +78,26 @@ def sign_up():
             db.session.commit()
             login_user(new_user, remember=True)
             flash('Account created!', category='success')
-            return redirect(url_for('views.profile'))
+            return redirect(url_for('views.home'))
 
     return render_template("html_registr.html", user=current_user)
+
+@auth.route("/profile")
+@login_required
+def profile():
+    # form = UpdateAccountForm()
+    # if form.validate_on_submit():
+    #     if form.picture.data:
+    #         picture_file = save_picture(form.picture.data)
+    #         current_user.image_file = picture_file
+    #     current_user.username = form.username.data
+    #     current_user.email = form.email.data
+    #     db.session.commit()
+    #     flash('Your account has been updated!', 'success')
+    #     return redirect(url_for('account'))
+    # elif request.method == 'GET':
+    #     form.username.data = current_user.username
+    #     form.email.data = current_user.email
+
+    image_file = url_for('static', filename='images/' + current_user.image_file)
+    return render_template('my_profile.html', title='Profile', image_file=image_file)
