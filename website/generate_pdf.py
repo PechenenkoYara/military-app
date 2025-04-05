@@ -22,9 +22,9 @@ def create_pdf():
 
     for line in text.split('\n'):
         pdf.multi_cell(0, 10, line)
-
     pdf_output = io.BytesIO()
-    pdf.output(pdf_output)
+    pdf_bytes = pdf.output(dest='S').encode('latin-1')
+    pdf_output.write(pdf_bytes)
     pdf_output.seek(0)
 
     return send_file(pdf_output, as_attachment=True, download_name="report.pdf", mimetype='application/pdf')
