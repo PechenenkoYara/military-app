@@ -7,10 +7,6 @@ from flask_login import login_user, login_required, logout_user, current_user
 
 auth = Blueprint('auth', __name__)
 
-@auth.route('/')
-def home_page():
-    return redirect(url_for('views.home'))
-
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
@@ -106,3 +102,9 @@ def profile():
 @login_required
 def contacts():
     return render_template('contacts.html', title='Contacts')
+
+@auth.route("/edit")
+@login_required
+def edit():
+    image_file = url_for('static', filename='images/' + current_user.image_file)
+    return render_template('edit.html', title='Edit profile', image_file=image_file)
