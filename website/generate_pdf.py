@@ -22,8 +22,8 @@ def create_pdf():
     pdf.add_page()
     pdf.set_font("Arial", size=12)
 
-    pdf.cell(0, 10, 'Звіт:', ln=True)
-    pdf.cell(0, 10, 'Необхідний equipment', ln=True)
+    pdf.cell(0, 10, 'Smt:', ln=True)
+    pdf.cell(0, 10, 'equipment', ln=True)
     pdf.ln(10)
 
     for line in text.split('\n'):
