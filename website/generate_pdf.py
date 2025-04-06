@@ -20,10 +20,10 @@ def create_pdf():
     
     pdf = FPDF()
     pdf.add_page()
-    pdf.set_font("Arial", size=12)
+    pdf.set_font("TimesNewRoman", size=12)
 
-    pdf.cell(0, 10, 'Smt:', ln=True)
-    pdf.cell(0, 10, 'equipment', ln=True)
+    pdf.cell(0, 10, 'Звіт:', ln=True)
+    pdf.cell(0, 10, 'Обладнання', ln=True)
     pdf.ln(10)
 
     for line in text.split('\n'):
