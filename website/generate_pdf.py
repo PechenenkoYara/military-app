@@ -30,7 +30,7 @@ def create_pdf():
     for line in text.split('\n'):
         pdf.multi_cell(0, 10, line)
     pdf_output = io.BytesIO()
-    pdf_bytes = pdf.output(dest='S').encode('latin-1')
+    pdf_bytes = pdf.output(dest='S').encode('utf-8')
     pdf_output.write(pdf_bytes)
     pdf_output.seek(0)
 
