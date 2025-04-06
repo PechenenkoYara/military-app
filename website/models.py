@@ -3,10 +3,10 @@ from flask_login import UserMixin
 from sqlalchemy.sql import func
 
 
-class Note(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    data = db.Column(db.String(10000))
-    date = db.Column(db.DateTime(timezone=True), default=func.now())
+class Contacts(db.Model):
+    number = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100))
+    occupation = db.Column(db.String(150))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
 
@@ -20,3 +20,4 @@ class User(db.Model, UserMixin):
     image_file = db.Column(db.String(20), nullable=False, default='profile.png')
     date_created = db.Column(db.DateTime(timezone=True), default=func.now())
     notes = db.Column(db.String(1500))
+    contacts = db.relationship('Contacts')

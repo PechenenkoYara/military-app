@@ -3,55 +3,86 @@
 
 {% block content %}
 <style>
-    h1 {
-        align-content: center;
-        top: 5%;
+    html, body { /* Забезпечуємо, що body також займає 100% висоти */
+        height: 100%;
+        margin: 0; /* Прибираємо стандартні відступи body */
     }
 
     .container {
         display: flex;
         width: 100%;
-        justify-content: space-between;
-        padding: 0;
-        position: relative;
+        height: 100%; /* Контейнер займає всю висоту екрану */
+        align-items: stretch; /* Розтягуємо елементи по висоті */
     }
 
-    .green_border {
-        width: 100%;
+    .side_block {
+        width: 21%; /* Фіксована ширина для бічних блоків */
         background-color: rgba(53, 88, 26, 1);
-        height: 70vh;
-        z-index: 1;
+        position: relative;
+        overflow: hidden; /* Щоб зображення не виходило за межі */
     }
 
-    .light_border {
-        width: 58%;
-        background-color: rgba(238, 238, 238, 1);
-        height: 70vh;
-        z-index: 1;
-        align-items: center;
-    }
-
-    .decorations {
-        width: 100%;
-        z-index: 2;
+    .side_content {
         position: absolute;
-        left: 0;
         top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .side_content_decoration {
+        width: 100%;
+        object-fit: contain;
         opacity: 7%;
+    }
+
+    .middle_block {
+        background-color: rgba(238, 238, 238, 1);
+        display: flex;
+        flex-direction: column; /* Розташовуємо вміст вертикально */
+        justify-content: flex-start; /* Вирівнюємо вміст по верхньому краю */
+        align-items: center; /* Центруємо вміст по горизонталі */
+        flex-grow: 1; /* Дозволяємо блоку займати вільний простір */
+        padding: 20px; /* Додайте верхні відступи для тексту */
+        text-align: center; /* Центруємо текст горизонтально */
+        height: 100%; /* Середній блок також займає всю висоту */
+    }
+
+    .middle_block h1 {
+        margin-top: 0; /* Прибираємо стандартні верхні відступи h1 */
+        margin-bottom: 0; /* Прибираємо стандартні нижні відступи h1 */
     }
 </style>
 
 <div class="container">
-    <div style="position: relative; width: 21%;">
-        <div class="green_border" style="margin-left: 0;"></div>
-        <img src="{{ url_for('static', filename='images/decoration.png') }}" class="decorations">
+    <div class="side_block left_block">
+        <div class="side_content">
+            <img src="{{ url_for('static', filename='images/decoration.png') }}" class="side_content_decoration">
+            <img src="{{ url_for('static', filename='images/decoration.png') }}" class="side_content_decoration">
+            <img src="{{ url_for('static', filename='images/decoration.png') }}" class="side_content_decoration">
+            <img src="{{ url_for('static', filename='images/decoration.png') }}" class="side_content_decoration">
+            <img src="{{ url_for('static', filename='images/decoration.png') }}" class="side_content_decoration">
+            <img src="{{ url_for('static', filename='images/decoration.png') }}" class="side_content_decoration">
+            <img src="{{ url_for('static', filename='images/decoration.png') }}" class="side_content_decoration">
+            <img src="{{ url_for('static', filename='images/decoration.png') }}" class="side_content_decoration">
+            </div>
     </div>
-    <div class="light_border" style="margin-right: 0; align-items: center; align-content: center;">
-        <h1 >Контакти</h1>
+    <div class="middle_block">
+        <h1>Контакти</h1>
     </div>
-    <div style="position: relative; width: 21%;">
-        <div class="green_border" style="margin-right: 0;"></div>
-        <img src="{{ url_for('static', filename='images/decoration.png') }}" class="decorations">
+    <div class="side_block right_block">
+        <div class="side_content">
+            <img src="{{ url_for('static', filename='images/decoration.png') }}" class="side_content_decoration">
+            <img src="{{ url_for('static', filename='images/decoration.png') }}" class="side_content_decoration">
+            <img src="{{ url_for('static', filename='images/decoration.png') }}" class="side_content_decoration">
+            <img src="{{ url_for('static', filename='images/decoration.png') }}" class="side_content_decoration">
+            <img src="{{ url_for('static', filename='images/decoration.png') }}" class="side_content_decoration">
+            <img src="{{ url_for('static', filename='images/decoration.png') }}" class="side_content_decoration">
+            <img src="{{ url_for('static', filename='images/decoration.png') }}" class="side_content_decoration">
+            <img src="{{ url_for('static', filename='images/decoration.png') }}" class="side_content_decoration">
+            </div>
     </div>
 </div>
 
