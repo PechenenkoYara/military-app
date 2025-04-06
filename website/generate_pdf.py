@@ -20,7 +20,8 @@ def create_pdf():
     
     pdf = FPDF()
     pdf.add_page()
-    pdf.set_font("TimesNewRoman", size=12)
+    pdf.add_font('DejaVu', '', 'static/fonts/DejaVuSans.ttf', uni=True)
+    pdf.set_font('DejaVu', '', 12)
 
     pdf.cell(0, 10, 'Звіт:', ln=True)
     pdf.cell(0, 10, 'Обладнання', ln=True)
