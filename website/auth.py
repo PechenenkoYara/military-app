@@ -1,15 +1,11 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
-from .models import User
+from .models import User, Contacts
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
 from flask_login import login_user, login_required, logout_user, current_user
 
 
 auth = Blueprint('auth', __name__)
-
-@auth.route('/')
-def home_page():
-    return redirect(url_for('views.home'))
 
 
 @auth.route('/login', methods=['GET', 'POST'])
@@ -85,24 +81,26 @@ def sign_up():
 @auth.route("/profile")
 @login_required
 def profile():
-    # form = UpdateAccountForm()
-    # if form.validate_on_submit():
-    #     if form.picture.data:
-    #         picture_file = save_picture(form.picture.data)
-    #         current_user.image_file = picture_file
-    #     current_user.username = form.username.data
-    #     current_user.email = form.email.data
-    #     db.session.commit()
-    #     flash('Your account has been updated!', 'success')
-    #     return redirect(url_for('account'))
-    # elif request.method == 'GET':
-    #     form.username.data = current_user.username
-    #     form.email.data = current_user.email
-
     image_file = url_for('static', filename='images/' + current_user.image_file)
     return render_template('my_profile.html', title='Profile', image_file=image_file)
 
 @auth.route("/contacts")
 @login_required
 def contacts():
-    return render_template('contacts.html', title='Contacts')
+    user_contacts = Contacts.query.filter_by(user_id=current_user.id).all()
+    return render_template('contacts.html', title='Contacts', contacts=user_contacts)
+
+@auth.route("/edit", methods=['GET', 'POST'])
+@login_required
+def edit():
+    image_file = url_for('static', filename='images/' + current_user.image_file)
+    if request.method == 'POST':
+        current_user.first_name = request.form.get('first_name')
+        current_user.last_name = request.form.get('last_name')
+        current_user.occupation = request.form.get('occupation')
+        current_user.notes = request.form.get('notes')
+        db.session.commit()
+        flash('Ваші дані профілю були оновлені!', category='success')
+        return redirect(url_for('auth.profile'))
+
+    return render_template('edit.html', title='Edit profile', image_file=image_file)

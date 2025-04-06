@@ -83,24 +83,26 @@
             <p class="t1">
                 {{ current_user.last_name }} {{ current_user.first_name }}/{{ current_user.occupation }}
             </p>
-            <p class="t2"">
+            <p class="t2">
                 {{ current_user.email }}
             </p>
-            <p class="t3">
-                Here are some notes `{{ current_user.notes }}` about me
-            </p>
+            {% if current_user.notes %}
+                <p class="t3">{{ current_user.notes }}</p>
+            {% else %}
+                <p class="t3" style="opacity: 30%;">Про мене ...</p>
+            {% endif %}
         </div>
     </div>
     <div style="display: flex; margin-top: 5%;">
         <div class="button-container">
             <div>
-                <a href="#" class="small-button">Мої контакти</a>
+                <a href="contacts" class="small-button">Мої контакти</a>
             </div>
             <div style="margin-left: 7%;">
                 <a href="#" class="small-button">Мої звіти</a>
             </div>
             <div style="margin-left: 7%;">
-                <a href="#" class="small-button">Про мене</a>
+                <a href="edit" class="small-button">Редагувати профіль</a>
             </div>
         </div>
     </div>
