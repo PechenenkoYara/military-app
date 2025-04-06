@@ -101,3 +101,8 @@ def profile():
 
     image_file = url_for('static', filename='images/' + current_user.image_file)
     return render_template('my_profile.html', title='Profile', image_file=image_file)
+
+@auth.route("/contacts")
+@login_required
+def contacts():
+    return render_template('contacts.html', title='Contacts')
