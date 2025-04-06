@@ -1,5 +1,5 @@
 {% extends "base_.html" %}
-{% block title %}Edit profile{% endblock %}
+{% block title %}Редагувати профіль{% endblock %}
 
 {% block content %}
 <style>
@@ -44,7 +44,8 @@
         white-space: nowrap;
     }
 
-    .right_frame fieldset {
+    .right_frame input[type="text"],
+    .right_frame textarea {
         font-size: 0.9em;
         color: #000000;
         padding: 0.5em;
@@ -54,17 +55,13 @@
         margin-top: 0;
         width: 70%;
         margin-bottom: 1em;
+        box-sizing: border-box; /* Ensure padding doesn't affect width */
     }
 
-    .scrolling_bar {
-        border: 1px solid #ccc;
-        border-radius: 5px;
+    .right_frame textarea {
         height: 150px;
         line-height: 1.6em; /* Adjust line height for readability */
         overflow: auto;
-        padding: 10px; /* Add padding inside the scrollbar */
-        background-color: #FAFAFA;
-        width: 70%;
         white-space: pre-wrap;
         text-align: left;
     }
@@ -82,32 +79,41 @@
         box-sizing: border-box;
         width: auto;
         margin-top: 20px;
+        cursor: pointer; /* Add cursor for better UX */
+        border: none; /* Remove default button border */
     }
 
     .button-container {
         width: 80%;
         display: flex;
         justify-content: flex-start;
-        margin-left: 250px;
+        margin-left: 0; /* Adjust margin */
         margin-top: 20px; /* Add some space above the button */
+    }
+
+    .button-container button {
+        margin-right: 10px; /* Add space between buttons if you have more */
     }
 </style>
 <div class="upper_box">
     <div class="profile_contain">
         <img src="{{ image_file }}" alt="Profile Picture">
         <div class="right_frame">
-            <p>Прізвище</p>
-            <fieldset>{{ current_user.last_name}}</fieldset>
-            <p>Ім'я</p>
-            <fieldset>{{ current_user.first_name}}</fieldset>
-            <p>Вид діяльності</p>
-            <fieldset>{{ current_user.occupation}}</fieldset>
-            <p>Про себе</p>
-            <div class="scrolling_bar">{{ current_user.notes}}</div>
+            <form method="POST">
+                <p>Прізвище</p>
+                <input type="text" name="last_name" value="{{ current_user.last_name }}" placeholder="{{ current_user.last_name }}">
+                <p>Ім'я</p>
+                <input type="text" name="first_name" value="{{ current_user.first_name }}" placeholder="{{ current_user.first_name }}">
+                <p>Вид діяльності</p>
+                <input type="text" name="occupation" value="{{ current_user.occupation }}" placeholder="{{ current_user.occupation }}">
+                <p>Про себе</p>
+                <textarea name="notes" placeholder="{{ current_user.notes }}">{{ current_user.notes }}</textarea>
+                <div class="button-container">
+                    <button type="submit" class="small-button">Зберегти зміни</button>
+                    <a href="{{ url_for('auth.profile') }}" class="small-button" style="background: gray;">Скасувати</a>
+                </div>
+            </form>
         </div>
-    </div>
-    <div class="button-container">
-        <a href="#" class="small-button">Редагувати</a>
     </div>
 </div>
 {% endblock %}

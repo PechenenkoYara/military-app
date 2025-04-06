@@ -19,4 +19,4 @@ class User(db.Model, UserMixin):
     occupation = db.Column(db.String(150))
     image_file = db.Column(db.String(20), nullable=False, default='profile.png')
     date_created = db.Column(db.DateTime(timezone=True), default=func.now())
-    notes = db.relationship('Note')
+    notes = db.Column(db.String(1500))
