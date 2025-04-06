@@ -3,23 +3,38 @@
 
 {% block content %}
 <style>
-    html, body { /* Забезпечуємо, що body також займає 100% висоти */
+    html, body {
         height: 100%;
-        margin: 0; /* Прибираємо стандартні відступи body */
+        margin: 0;
     }
 
-    .container {
+    .full-height-container {
         display: flex;
+        flex-direction: column;
         width: 100%;
-        height: 100%; /* Контейнер займає всю висоту екрану */
-        align-items: stretch; /* Розтягуємо елементи по висоті */
+        min-height: 100%;
+        background-color: rgba(238, 238, 238, 1);
+        box-sizing: border-box;
+    }
+
+    h1 {
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .content-wrapper {
+        display: flex;
+        flex-grow: 1;
+        width: 100%;
+        align-items: stretch;
     }
 
     .side_block {
-        width: 21%; /* Фіксована ширина для бічних блоків */
+        width: 21%;
         background-color: rgba(53, 88, 26, 1);
         position: relative;
-        overflow: hidden; /* Щоб зображення не виходило за межі */
+        overflow: hidden;
     }
 
     .side_content {
@@ -39,50 +54,124 @@
     }
 
     .middle_block {
-        background-color: rgba(238, 238, 238, 1);
         display: flex;
-        flex-direction: column; /* Розташовуємо вміст вертикально */
-        justify-content: flex-start; /* Вирівнюємо вміст по верхньому краю */
-        align-items: center; /* Центруємо вміст по горизонталі */
-        flex-grow: 1; /* Дозволяємо блоку займати вільний простір */
-        padding: 20px; /* Додайте верхні відступи для тексту */
-        text-align: center; /* Центруємо текст горизонтально */
-        height: 100%; /* Середній блок також займає всю висоту */
+        justify-content: space-between;
+        align-items: flex-start;
+        flex-grow: 1;
+        padding: 20px;
+        box-sizing: border-box;
+        margin: 20px;
     }
 
-    .middle_block h1 {
-        margin-top: 0; /* Прибираємо стандартні верхні відступи h1 */
-        margin-bottom: 0; /* Прибираємо стандартні нижні відступи h1 */
+    .contacts-table-container {
+        flex: 2;
+        overflow-y: auto;
+        margin-right: 20px;
+    }
+
+    .contacts-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .contacts-table th, .contacts-table td {
+        padding: 10px 15px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .contacts-table th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+
+    .contacts-table tr:last-child td {
+        border-bottom: none;
+    }
+
+    .filter-container {
+        flex: 1;
+        padding: 15px;
+        background-color: #f9f9f9;
+        border: 1px solid #eee;
+        border-radius: 5px;
+        box-sizing: border-box;
+        height: fit-content;
+    }
+
+    .filter-container h3 {
+        margin-top: 0;
+        margin-bottom: 10px;
+        font-size: 1.2em;
+    }
+
+    .filter-container ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .filter-container ul li {
+        padding: 5px 0;
+    }
+
+    .filter-container ul li input[type="checkbox"] {
+        margin-right: 5px;
     }
 </style>
 
-<div class="container">
-    <div class="side_block left_block">
-        <div class="side_content">
-            <img src="{{ url_for('static', filename='images/decoration.png') }}" class="side_content_decoration">
-            <img src="{{ url_for('static', filename='images/decoration.png') }}" class="side_content_decoration">
-            <img src="{{ url_for('static', filename='images/decoration.png') }}" class="side_content_decoration">
-            <img src="{{ url_for('static', filename='images/decoration.png') }}" class="side_content_decoration">
-            <img src="{{ url_for('static', filename='images/decoration.png') }}" class="side_content_decoration">
-            <img src="{{ url_for('static', filename='images/decoration.png') }}" class="side_content_decoration">
-            <img src="{{ url_for('static', filename='images/decoration.png') }}" class="side_content_decoration">
-            <img src="{{ url_for('static', filename='images/decoration.png') }}" class="side_content_decoration">
+<div class="full-height-container">
+    <div class="content-wrapper">
+        <div class="side_block left_block">
+            <div class="side_content">
+                {% for i in range(10) %} <img src="{{ url_for('static', filename='images/decoration.png') }}" class="side_content_decoration">
+                {% endfor %}
             </div>
-    </div>
-    <div class="middle_block">
+        </div>
         <h1>Контакти</h1>
-    </div>
-    <div class="side_block right_block">
-        <div class="side_content">
-            <img src="{{ url_for('static', filename='images/decoration.png') }}" class="side_content_decoration">
-            <img src="{{ url_for('static', filename='images/decoration.png') }}" class="side_content_decoration">
-            <img src="{{ url_for('static', filename='images/decoration.png') }}" class="side_content_decoration">
-            <img src="{{ url_for('static', filename='images/decoration.png') }}" class="side_content_decoration">
-            <img src="{{ url_for('static', filename='images/decoration.png') }}" class="side_content_decoration">
-            <img src="{{ url_for('static', filename='images/decoration.png') }}" class="side_content_decoration">
-            <img src="{{ url_for('static', filename='images/decoration.png') }}" class="side_content_decoration">
-            <img src="{{ url_for('static', filename='images/decoration.png') }}" class="side_content_decoration">
+        <div class="middle_block">
+            <div class="contacts-table-container">
+                <table class="contacts-table">
+                    <thead>
+                        <tr>
+                            <th>№</th>
+                            <th>Ім'я</th>
+                            <th>Вид діяльності</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for contact in contacts %}
+                            <tr>
+                                <td>{{ contact.number }}</td>
+                                <td>{{ contact.name }}</td>
+                                <td>{{ contact.occupation }}</td>
+                            </tr>
+                        {% else %}
+                            <tr><td colspan="3">У вас ще немає контактів.</td></tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
+            <div class="filter-container">
+                <ul>
+                    <li><input type="checkbox" id="filter-all" name="filter" value="all" checked> <label for="filter-all">Всі</label></li>
+                    <li><input type="checkbox" id="filter-автомобілі" name="filter" value="Автомобілі"> <label for="filter-автомобілі">Автомобілі</label></li>
+                    <li><input type="checkbox" id="filter-медикаменти" name="filter" value="Медикаменти"> <label for="filter-медикаменти">Медикаменти</label></li>
+                    <li><input type="checkbox" id="filter-одяг" name="filter" value="Одяг і омуніція"> <label for="filter-одяг">Одяг і омуніція</label></li>
+                    <li><input type="checkbox" id="filter-сітки" name="filter" value="Сітки"> <label for="filter-сітки">Сітки</label></li>
+                    <li><input type="checkbox" id="filter-3д-друк" name="filter" value="3D друк"> <label for="filter-3д-друк">3D друк</label></li>
+                    <li><input type="checkbox" id="filter-техніка" name="filter" value="Техніка"> <label for="filter-техніка">Техніка</label></li>
+                    <li><input type="checkbox" id="filter-кошти" name="filter" value="Кошти"> <label for="filter-кошти">Кошти</label></li>
+                    <li><input type="checkbox" id="filter-продукти" name="filter" value="Продукти"> <label for="filter-продукти">Продукти</label></li>
+                </ul>
+            </div>
+        </div>
+        <div class="side_block right_block">
+            <div class="side_content">
+                {% for i in range(10) %} <img src="{{ url_for('static', filename='images/decoration.png') }}" class="side_content_decoration">
+                {% endfor %}
+            </div>
+        </div>
     </div>
 </div>
 

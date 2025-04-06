@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
-from .models import User
+from .models import User, Contacts
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
 from flask_login import login_user, login_required, logout_user, current_user
@@ -87,7 +87,8 @@ def profile():
 @auth.route("/contacts")
 @login_required
 def contacts():
-    return render_template('contacts.html', title='Contacts')
+    user_contacts = Contacts.query.filter_by(user_id=current_user.id).all()
+    return render_template('contacts.html', title='Contacts', contacts=user_contacts)
 
 @auth.route("/edit", methods=['GET', 'POST'])
 @login_required
