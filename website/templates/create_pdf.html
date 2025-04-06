@@ -36,13 +36,42 @@
   </style>
 </head>
 <body>
-
 <h1>Створи свій звіт (PDF)</h1>
 
+<h1>Створи акт приймання-передачі гуманітарної допомоги</h1>
+
 <form action="/create_pdf" method="post">
-  <textarea name="text_content" placeholder="Введи свій текст тут..."></textarea><br>
+  <label for="date">Дата:</label><br>
+  <input type="text" name="date" id="date" placeholder="Введіть дату" required><br>
+
+  <label for="city">Місто:</label><br>
+  <input type="text" name="city" id="city" placeholder="Введіть місто" required><br>
+
+  <label for="donor_name">Назва благодійника:</label><br>
+  <input type="text" name="donor_name" id="donor_name" required><br>
+
+  <label for="donor_representative">Представник благодійника (ПІБ):</label><br>
+  <input type="text" name="donor_representative" id="donor_representative" required><br>
+
+  <label for="donor_position">Посада представника благодійника:</label><br>
+  <input type="text" name="donor_position" id="donor_position" required><br>
+
+  <label for="donor_basis">На підставі:</label><br>
+  <input type="text" name="donor_basis" id="donor_basis" required><br>
+
+  <label for="recipient_name">Назва отримувача:</label><br>
+  <input type="text" name="recipient_name" id="recipient_name" required><br>
+
+  <label for="recipient_representative">Представник отримувача (ПІБ):</label><br>
+  <input type="text" name="recipient_representative" id="recipient_representative" required><br>
+
+  <label for="recipient_position">Посада представника отримувача:</label><br>
+  <input type="text" name="recipient_position" id="recipient_position" required><br>
+
+  <label for="recipient_basis">На підставі:</label><br>
+  <input type="text" name="recipient_basis" id="recipient_basis" required><br>
+
   <button type="submit">Згенерувати PDF</button>
 </form>
-
 </body>
 </html>
