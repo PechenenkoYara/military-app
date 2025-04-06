@@ -61,6 +61,7 @@
         padding: 20px;
         box-sizing: border-box;
         margin: 20px;
+        width: 100%;
     }
 
     .contacts-table-container {
@@ -118,6 +119,30 @@
     .filter-container ul li input[type="checkbox"] {
         margin-right: 5px;
     }
+
+    .fieldset_container {
+        display: flex;
+        width: 100%;
+        flex: 1;
+        justify-content: space-between;
+    }
+
+    .small-button {
+        background: rgba(53, 88, 26, 1);
+        border-radius: 30px;
+        padding: 10px 30px;
+        text-align: center;
+        line-height: normal;
+        font-size: 1em;
+        color: rgba(238, 238, 238, 1);
+        text-decoration: none;
+        display: inline-block;
+        box-sizing: border-box;
+        width: auto;
+        margin-top: 20px;
+        cursor: pointer;
+        border: none;
+    }
 </style>
 
 <div class="full-height-container">
@@ -128,42 +153,52 @@
                 {% endfor %}
             </div>
         </div>
-        <h1>Контакти</h1>
-        <div class="middle_block">
-            <div class="contacts-table-container">
-                <table class="contacts-table">
-                    <thead>
-                        <tr>
-                            <th>№</th>
-                            <th>Ім'я</th>
-                            <th>Вид діяльності</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for contact in contacts %}
+        <div style="display: flex; flex-direction: column; width: 58%;">
+            <h1 style="text-align: center;">Контакти</h1>
+            <div class="middle_block">
+                <div class="contacts-table-container">
+                    <form method="POST">
+                        <div class="fieldset_container">
+                            <input type="text" name="name" placeholder="Ім'я">
+                            <input type="text" name="occupation" placeholder="Спеціалізація">
+                            <input type="text" name="number" placeholder="Номер телефону">
+                            <button type="submit" class="small-button">додати</button>
+                        </div>
+                    </form>
+                    <table class="contacts-table">
+                        <thead>
                             <tr>
-                                <td>{{ contact.number }}</td>
-                                <td>{{ contact.name }}</td>
-                                <td>{{ contact.occupation }}</td>
+                                <th>№</th>
+                                <th>Ім'я</th>
+                                <th>Вид діяльності</th>
                             </tr>
-                        {% else %}
-                            <tr><td colspan="3">У вас ще немає контактів.</td></tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-            <div class="filter-container">
-                <ul>
-                    <li><input type="checkbox" id="filter-all" name="filter" value="all" checked> <label for="filter-all">Всі</label></li>
-                    <li><input type="checkbox" id="filter-автомобілі" name="filter" value="Автомобілі"> <label for="filter-автомобілі">Автомобілі</label></li>
-                    <li><input type="checkbox" id="filter-медикаменти" name="filter" value="Медикаменти"> <label for="filter-медикаменти">Медикаменти</label></li>
-                    <li><input type="checkbox" id="filter-одяг" name="filter" value="Одяг і омуніція"> <label for="filter-одяг">Одяг і омуніція</label></li>
-                    <li><input type="checkbox" id="filter-сітки" name="filter" value="Сітки"> <label for="filter-сітки">Сітки</label></li>
-                    <li><input type="checkbox" id="filter-3д-друк" name="filter" value="3D друк"> <label for="filter-3д-друк">3D друк</label></li>
-                    <li><input type="checkbox" id="filter-техніка" name="filter" value="Техніка"> <label for="filter-техніка">Техніка</label></li>
-                    <li><input type="checkbox" id="filter-кошти" name="filter" value="Кошти"> <label for="filter-кошти">Кошти</label></li>
-                    <li><input type="checkbox" id="filter-продукти" name="filter" value="Продукти"> <label for="filter-продукти">Продукти</label></li>
-                </ul>
+                        </thead>
+                        <tbody>
+                            {% for contact in contacts %}
+                                <tr>
+                                    <td>{{ contact.number }}</td>
+                                    <td>{{ contact.name }}</td>
+                                    <td>{{ contact.occupation }}</td>
+                                </tr>
+                            {% else %}
+                                <tr><td colspan="3">У вас ще немає контактів.</td></tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="filter-container">
+                    <ul>
+                        <li><input type="checkbox" id="filter-all" name="filter" value="all" checked> <label for="filter-all">Всі</label></li>
+                        <li><input type="checkbox" id="filter-автомобілі" name="filter" value="Автомобілі"> <label for="filter-автомобілі">Автомобілі</label></li>
+                        <li><input type="checkbox" id="filter-медикаменти" name="filter" value="Медикаменти"> <label for="filter-медикаменти">Медикаменти</label></li>
+                        <li><input type="checkbox" id="filter-одяг" name="filter" value="Одяг і омуніція"> <label for="filter-одяг">Одяг і омуніція</label></li>
+                        <li><input type="checkbox" id="filter-сітки" name="filter" value="Сітки"> <label for="filter-сітки">Сітки</label></li>
+                        <li><input type="checkbox" id="filter-3д-друк" name="filter" value="3D друк"> <label for="filter-3д-друк">3D друк</label></li>
+                        <li><input type="checkbox" id="filter-техніка" name="filter" value="Техніка"> <label for="filter-техніка">Техніка</label></li>
+                        <li><input type="checkbox" id="filter-кошти" name="filter" value="Кошти"> <label for="filter-кошти">Кошти</label></li>
+                        <li><input type="checkbox" id="filter-продукти" name="filter" value="Продукти"> <label for="filter-продукти">Продукти</label></li>
+                    </ul>
+                </div>
             </div>
         </div>
         <div class="side_block right_block">

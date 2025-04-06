@@ -84,10 +84,25 @@ def profile():
     image_file = url_for('static', filename='images/' + current_user.image_file)
     return render_template('my_profile.html', title='Profile', image_file=image_file)
 
-@auth.route("/contacts")
+@auth.route("/contacts", methods=['GET', 'POST'])
 @login_required
 def contacts():
     user_contacts = Contacts.query.filter_by(user_id=current_user.id).all()
+    if request.method == 'POST':
+        name = request.form.get('name')
+        number = request.form.get('number')
+        occupation = request.form.get('occupation')
+
+        new_contact = Contacts(
+            name=name,
+            number=number,
+            occupation=occupation,
+            user_id=current_user.id
+        )
+
+        db.session.add(new_contact)
+        db.session.commit()
+        return redirect(url_for('auth.contacts'))
     return render_template('contacts.html', title='Contacts', contacts=user_contacts)
 
 @auth.route("/edit", methods=['GET', 'POST'])
