@@ -1,0 +1,57 @@
+{% extends "base_.html" %}
+{% block title %}Contacts{% endblock %}
+
+{% block content %}
+<style>
+    h1 {
+        align-content: center;
+        top: 5%;
+    }
+
+    .container {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        padding: 0;
+        position: relative;
+    }
+
+    .green_border {
+        width: 100%;
+        background-color: rgba(53, 88, 26, 1);
+        height: 70vh;
+        z-index: 1;
+    }
+
+    .light_border {
+        width: 58%;
+        background-color: rgba(238, 238, 238, 1);
+        height: 70vh;
+        z-index: 1;
+    }
+
+    .decorations {
+        width: 100%;
+        z-index: 2;
+        position: absolute;
+        left: 0;
+        top: 0;
+        opacity: 7%;
+    }
+</style>
+
+<div class="container">
+    <div style="position: relative; width: 21%;">
+        <div class="green_border" style="margin-left: 0;"></div>
+        <img src="{{ url_for('static', filename='images/decoration.png') }}" class="decorations">
+    </div>
+    <div class="light_border" style="margin-right: 0;">
+        <h1 >Контакти</h1>
+    </div>
+    <div style="position: relative; width: 21%;">
+        <div class="green_border" style="margin-right: 0;"></div>
+        <img src="{{ url_for('static', filename='images/decoration.png') }}" class="decorations">
+    </div>
+</div>
+
+{% endblock %}
