@@ -20,7 +20,12 @@ def create_pdf():
     
     pdf = FPDF()
     pdf.add_page()
-    pdf.set_font("Arial", size=12)
+    pdf.add_font('DejaVu', '', 'website/static/fonts/DejaVuSans.ttf', uni=True)
+    pdf.set_font('DejaVu', '', 12)
+
+    pdf.cell(0, 10, 'Звіт:', ln=True)
+    pdf.cell(0, 10, 'Обладнання', ln=True)
+    pdf.ln(10)
 
     for line in text.split('\n'):
         pdf.multi_cell(0, 10, line)
@@ -30,6 +35,3 @@ def create_pdf():
     pdf_output.seek(0)
 
     return send_file(pdf_output, as_attachment=True, download_name="report.pdf", mimetype='application/pdf')
-
-# if __name__ == '__main__':
-#     app.run(debug=True)
