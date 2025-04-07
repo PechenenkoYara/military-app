@@ -87,7 +87,7 @@
                 {{ current_user.email }}
             </p>
             {% if current_user.notes %}
-                <p class="t3">{{ current_user.notes }}</p>
+                <p class="t3" style="white-space: pre-wrap;">{{ current_user.notes }}</p>
             {% else %}
                 <p class="t3" style="opacity: 30%;">Про мене ...</p>
             {% endif %}

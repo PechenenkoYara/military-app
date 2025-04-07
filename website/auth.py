@@ -115,6 +115,21 @@ def edit():
         current_user.occupation = request.form.get('occupation')
         current_user.notes = request.form.get('notes')
         db.session.commit()
+        old_p = request.form.get("old_password")
+        new_p = request.form.get("new_password")
+        check_p = request.form.get("check_password")
+
+        if old_p or new_p or check_p:
+            if not (old_p and new_p and check_p):
+                fields = {old_p: "Старий пароль", 
+                          new_p: "Новий пароль", 
+                          check_p: "Пароль на підтвердження"}
+                empty_f = [value for key, value in fields.items() if not key]
+                return f"Ви не заповнили пол{'я' if len(empty_f)>>1 else 'е'}: {empty_f}/."
+                return redirect(url_for('auth.edit'))
+            else:
+                ...
+
         flash('Ваші дані профілю були оновлені!', category='success')
         return redirect(url_for('auth.profile'))
 
