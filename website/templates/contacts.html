@@ -6,15 +6,16 @@
     html, body {
         height: 100%;
         margin: 0;
+        background-color: rgba(238, 238, 238, 1);
     }
 
     .full-height-container {
         display: flex;
-        flex-direction: column;
         width: 100%;
         min-height: 100%;
-        background-color: rgba(238, 238, 238, 1);
         box-sizing: border-box;
+        flex-grow: 1;
+        align-items: stretch;
     }
 
     h1 {
@@ -23,50 +24,51 @@
         margin-bottom: 20px;
     }
 
-    .content-wrapper {
-        display: flex;
-        flex-grow: 1;
-        width: 100%;
-        align-items: stretch;
-    }
-
-    .side_block {
-        width: 21%;
-        background-color: rgba(53, 88, 26, 1);
-        position: relative;
-        overflow: hidden;
-    }
-
-    .side_content {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-    }
-
-    .side_content_decoration {
-        width: 100%;
-        object-fit: contain;
-        opacity: 7%;
-    }
-
-    .middle_block {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        flex-grow: 1;
+    .left-column {
+        flex: 1;
         padding: 20px;
         box-sizing: border-box;
-        margin: 20px;
+        display: flex;
+        flex-direction: column;
+        margin: 2%;
+    }
+
+    .contact-form {
+        margin-bottom: 20px;
+    }
+
+    .fieldset_container {
+        display: flex;
+        gap: 10px; /* Space out input fields */
+        margin-bottom: 10px;
+    }
+
+    .fieldset_container input[type="text"] {
+        flex-grow: 1;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    .small-button {
+        background: rgba(53, 88, 26, 1);
+        border-radius: 30px;
+        padding: 10px 20px; /* Adjust padding for smaller button */
+        text-align: center;
+        line-height: normal;
+        font-size: 1em;
+        color: rgba(238, 238, 238, 1);
+        text-decoration: none;
+        display: inline-block;
+        box-sizing: border-box;
+        width: auto;
+        cursor: pointer;
+        border: none;
     }
 
     .contacts-table-container {
-        flex: 2;
         overflow-y: auto;
-        margin-right: 20px;
     }
 
     .contacts-table {
@@ -89,89 +91,102 @@
         border-bottom: none;
     }
 
-    .filter-container {
-        flex: 1;
+    .right-column {
+        width: 20%;
         padding: 15px;
         background-color: #f9f9f9;
         border: 1px solid #eee;
-        border-radius: 5px;
+        border-radius: 10px;
         box-sizing: border-box;
         height: fit-content;
+        margin: 3%;
     }
 
-    .filter-container h3 {
+    .right-column h3 {
         margin-top: 0;
         margin-bottom: 10px;
         font-size: 1.2em;
     }
 
-    .filter-container ul {
+    .right-column ul {
         list-style: none;
         padding: 0;
         margin: 0;
     }
 
-    .filter-container ul li {
+    .right-column ul li {
         padding: 5px 0;
     }
 
-    .filter-container ul li input[type="checkbox"] {
+    .right-column ul li input[type="checkbox"] {
         margin-right: 5px;
     }
-</style>
 
+    .home_sign_img {
+        width: 45px;
+        height: 45px;
+        margin-top: 7.5px;
+        margin-left: 7.5px;
+    }
+
+    .title_box {
+        width: 100%;
+        height: 60px;
+        display: flex;
+        background-color: rgba(53, 88, 26, 1);
+    }
+</style>
+<div class="title_box">
+    <a href="/" class="home_sign_img"><img src="/static/images/home_sign.png"></a>
+</div>
 <div class="full-height-container">
-    <div class="content-wrapper">
-        <div class="side_block left_block">
-            <div class="side_content">
-                {% for i in range(10) %} <img src="{{ url_for('static', filename='images/decoration.png') }}" class="side_content_decoration">
-                {% endfor %}
-            </div>
+    <div class="left-column">
+        <div class="contact-form">
+            <form method="POST">
+                <div class="fieldset_container">
+                    <input type="text" name="name" placeholder="Ім'я">
+                    <input type="text" name="occupation" placeholder="Спеціалізація">
+                    <input type="text" name="number" placeholder="Номер телефону">
+                </div>
+                <button type="submit" class="small-button">додати</button>
+            </form>
         </div>
-        <h1>Контакти</h1>
-        <div class="middle_block">
-            <div class="contacts-table-container">
-                <table class="contacts-table">
-                    <thead>
+        <div class="contacts-table-container">
+            <table class="contacts-table">
+                <thead>
+                    <tr>
+                        <th>Ім'я</th>
+                        <th>Галузь</th>
+                        <th>Номер телефону</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for contact in contacts %}
                         <tr>
-                            <th>№</th>
-                            <th>Ім'я</th>
-                            <th>Вид діяльності</th>
+                            <td>{{ contact.name }}</td>
+                            <td>{{ contact.occupation }}</td>
+                            <td>{{ contact.number }}</td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        {% for contact in contacts %}
-                            <tr>
-                                <td>{{ contact.number }}</td>
-                                <td>{{ contact.name }}</td>
-                                <td>{{ contact.occupation }}</td>
-                            </tr>
-                        {% else %}
-                            <tr><td colspan="3">У вас ще немає контактів.</td></tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-            <div class="filter-container">
-                <ul>
-                    <li><input type="checkbox" id="filter-all" name="filter" value="all" checked> <label for="filter-all">Всі</label></li>
-                    <li><input type="checkbox" id="filter-автомобілі" name="filter" value="Автомобілі"> <label for="filter-автомобілі">Автомобілі</label></li>
-                    <li><input type="checkbox" id="filter-медикаменти" name="filter" value="Медикаменти"> <label for="filter-медикаменти">Медикаменти</label></li>
-                    <li><input type="checkbox" id="filter-одяг" name="filter" value="Одяг і омуніція"> <label for="filter-одяг">Одяг і омуніція</label></li>
-                    <li><input type="checkbox" id="filter-сітки" name="filter" value="Сітки"> <label for="filter-сітки">Сітки</label></li>
-                    <li><input type="checkbox" id="filter-3д-друк" name="filter" value="3D друк"> <label for="filter-3д-друк">3D друк</label></li>
-                    <li><input type="checkbox" id="filter-техніка" name="filter" value="Техніка"> <label for="filter-техніка">Техніка</label></li>
-                    <li><input type="checkbox" id="filter-кошти" name="filter" value="Кошти"> <label for="filter-кошти">Кошти</label></li>
-                    <li><input type="checkbox" id="filter-продукти" name="filter" value="Продукти"> <label for="filter-продукти">Продукти</label></li>
-                </ul>
-            </div>
+                    {% else %}
+                        <tr><td colspan="3">У вас ще немає контактів.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
-        <div class="side_block right_block">
-            <div class="side_content">
-                {% for i in range(10) %} <img src="{{ url_for('static', filename='images/decoration.png') }}" class="side_content_decoration">
-                {% endfor %}
-            </div>
-        </div>
+    </div>
+    <div class="right-column">
+        <h3>Фільтр</h3>
+        <ul>
+            <li><input type="checkbox" id="filter-автомобілі" name="filter" value="Автомобілі"> <label for="filter-автомобілі">Автомобілі</label></li>
+            <li><input type="checkbox" id="filter-медикаменти" name="filter" value="Медикаменти"> <label for="filter-медикаменти">Медикаменти</label></li>
+            <li><input type="checkbox" id="filter-одяг" name="filter" value="Одяг і омуніція"> <label for="filter-одяг">Одяг і омуніція</label></li>
+            <li><input type="checkbox" id="filter-сітки" name="filter" value="Сітки"> <label for="filter-сітки">Сітки</label></li>
+            <li><input type="checkbox" id="filter-3д-друк" name="filter" value="3D друк"> <label for="filter-3д-друк">3D друк</label></li>
+            <li><input type="checkbox" id="filter-техніка" name="filter" value="Техніка"> <label for="filter-техніка">Техніка</label></li>
+            <li><input type="checkbox" id="filter-кошти" name="filter" value="Кошти"> <label for="filter-кошти">Кошти</label></li>
+            <li><input type="checkbox" id="filter-продукти" name="filter" value="Продукти"> <label for="filter-продукти">Продукти</label></li>
+            <li><input type="checkbox" id="filter-all" name="filter" value="all" checked> <label for="filter-all">Інше</label></li>
+        </ul>
     </div>
 </div>
 

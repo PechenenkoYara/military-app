@@ -106,6 +106,12 @@
                 <input type="text" name="first_name" value="{{ current_user.first_name }}" placeholder="{{ current_user.first_name }}">
                 <p>Вид діяльності</p>
                 <input type="text" name="occupation" value="{{ current_user.occupation }}" placeholder="{{ current_user.occupation }}">
+                <p>Впишіть старий пароль, щоб встановити новий</p>
+                <input type="text" name="old_password" placeholder="Старий пароль">
+                <p>Новий пароль</p>
+                <input type="text" name="new_password" placeholder="••••••••">
+                <p>Підтвердіть пароль</p>
+                <input type="text" name="check_password" placeholder="••••••••">
                 <p>Про себе</p>
                 <textarea name="notes" placeholder="{{ current_user.notes }}">{{ current_user.notes }}</textarea>
                 <div class="button-container">

@@ -84,10 +84,25 @@ def profile():
     image_file = url_for('static', filename='images/' + current_user.image_file)
     return render_template('my_profile.html', title='Profile', image_file=image_file)
 
-@auth.route("/contacts")
+@auth.route("/contacts", methods=['GET', 'POST'])
 @login_required
 def contacts():
     user_contacts = Contacts.query.filter_by(user_id=current_user.id).all()
+    if request.method == 'POST':
+        name = request.form.get('name')
+        number = request.form.get('number')
+        occupation = request.form.get('occupation')
+
+        new_contact = Contacts(
+            name=name,
+            number=number,
+            occupation=occupation,
+            user_id=current_user.id
+        )
+
+        db.session.add(new_contact)
+        db.session.commit()
+        return redirect(url_for('auth.contacts'))
     return render_template('contacts.html', title='Contacts', contacts=user_contacts)
 
 @auth.route("/edit", methods=['GET', 'POST'])
@@ -100,6 +115,21 @@ def edit():
         current_user.occupation = request.form.get('occupation')
         current_user.notes = request.form.get('notes')
         db.session.commit()
+        old_p = request.form.get("old_password")
+        new_p = request.form.get("new_password")
+        check_p = request.form.get("check_password")
+
+        if old_p or new_p or check_p:
+            if not (old_p and new_p and check_p):
+                fields = {old_p: "Старий пароль", 
+                          new_p: "Новий пароль", 
+                          check_p: "Пароль на підтвердження"}
+                empty_f = [value for key, value in fields.items() if not key]
+                return f"Ви не заповнили пол{'я' if len(empty_f)>>1 else 'е'}: {empty_f}/."
+                return redirect(url_for('auth.edit'))
+            else:
+                ...
+
         flash('Ваші дані профілю були оновлені!', category='success')
         return redirect(url_for('auth.profile'))
 
