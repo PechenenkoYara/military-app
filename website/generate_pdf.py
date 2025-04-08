@@ -31,23 +31,28 @@ def create_pdf():
     pdf = FPDF()
     pdf.add_page()
     pdf.add_font('DejaVu', '', 'website/static/fonts/DejaVuSans.ttf', uni=True)
-    pdf.set_font('DejaVu', '', 8)
+    pdf.set_font('DejaVu', '', 12)
     # pdf.set_font("Arial", size=12)
 
     pdf.cell(200, 10, txt="АКТ приймання-передачі гуманітарної (благодійної) допомоги", ln=True, align='C')
     pdf.cell(200, 10, txt=f'{date}року', ln=True, align='C')
     pdf.cell(200, 10, txt=f"м. {city}", ln=True, align='C')
-    pdf.ln(10)
+    pdf.ln(3)
+    usable_width = pdf.w - 2 * pdf.l_margin
+    pdf.multi_cell(usable_width, 10, txt=f"{volunteer_side} в особі {volunteer_name}, {volunteer_position}\
+ , що діє на підставі {volunteer_basis} з однієї сторони, та {recipient_side}\
+в особі {recipient_name}, {recipient_position}, що діє на підставі {recipient_basis} з іншої сторони,")
 
-    pdf.cell(200, 10, txt=f"Благодійник: {volunteer_side}", ln=True)
-    pdf.cell(200, 10, txt=f"Представник благодійника: {volunteer_name}, {volunteer_position}", ln=True)
-    pdf.cell(200, 10, txt=f"На підставі: {volunteer_basis}", ln=True)
-    pdf.ln(10)
+    pdf.cell(200, 10, txt = 'Уклали цей Акт приймання-передачі гуманітарної благодійної допомоги про таке:', ln=True)
+    pdf.cell(200, 10, txt = '1. Благодійник передав, а Отримувач отримав таку гуманітарну допомогу:', ln=True)
+    # pdf.cell(200, 10, txt=f"в особі {volunteer_name}, {volunteer_position}", ln=True)
+    # pdf.cell(200, 10, txt=f", що діє на підставі {volunteer_basis} з однієї сторони, та", ln=True)
+    # pdf.ln(10)
     
-    pdf.cell(200, 10, txt=f"Отримувач: {recipient_side}", ln=True)
-    pdf.cell(200, 10, txt=f"Представник отримувача: {recipient_name}, {recipient_position}", ln=True)
-    pdf.cell(200, 10, txt=f"На підставі: {recipient_basis}", ln=True)
-    pdf.ln(10)
+    # pdf.cell(200, 10, txt=f"{recipient_side}", ln=True)
+    # pdf.cell(200, 10, txt=f"в особі {recipient_name}, {recipient_position}", ln=True)
+    # pdf.cell(200, 10, txt=f"На підставі: {recipient_basis}", ln=True)
+    # pdf.ln(10)
 
     amount = 0
     money = 0
@@ -83,38 +88,11 @@ def create_pdf():
     pdf.set_font("DejaVu", '', 10)
     pdf.cell(180, 10, txt=f"УСЬОГО: {amount} шт. {money} грн", ln=True)
 
-    # amount = 0
-    # money = 0
-    # rows = equipment.strip().split('\n')
-
-    # pdf.cell(8, 15, 'N з/п', border=1, align='C')
-    # pdf.cell(50, 15, 'Назва матеріальних цінностей', border=1, align='C')
-    # pdf.cell(25, 15, 'Одиниця виміру', border=1, align='C')
-    # pdf.multi_cell(16, 5, 'Кількість, шт.', border=1, align='C')
-    # pdf.multi_cell(35, 5, 'Вартість (оціночна) за 1 поз., у грн без ПДВ', border=1, align='C')
-    # pdf.multi_cell(30,5, 'Загальна вартість (оціночна), у грн без ПДВ', border=1, align='C')
-    # pdf.ln(10)
-
-    # for i, row in enumerate(rows):
-    #     parts = [p.strip() for p in row.split(',')]
-    #     name, unit, q, p, total = parts
-
-    #     pdf.cell(10,5, str(i), border=1, align='C')
-    #     pdf.cell(50, 5, name, border=1)
-    #     pdf.cell(30, 5, unit, border=1, align='C')
-    #     pdf.cell(20, 5, q, border=1, align='C')
-    #     amount += int(q)
-    #     money += int(p)
-    #     pdf.cell(35, 5, p, border=1, align='C')
-    #     pdf.cell(35, 5, total, border=1, align='C')
-    #     pdf.ln()
-
-    # pdf.cell(200, 10, txt=f"УСЬОГО: {amount} шт. {money} грн", ln=True)
-    
+    pdf.set_font('DejaVu', '', 12)
     pdf.ln(10)
-    pdf.cell(200, 10, txt="2. Матеріальні цінності передано в належному стані, Сторони претензій одна до одної не мають.", ln=True)
-    pdf.cell(200, 10, txt="3. Цей Акт набуває чинності з дати його підписання уповноваженими представниками обох Сторін.", ln=True)
-    pdf.cell(200, 10, txt="4. Цей Акт складено у двох примірниках, які мають однакову юридичну силу для обох Сторін.", ln=True)
+    pdf.multi_cell(180, 10, txt="2. Матеріальні цінності передано в належному стані, Сторони претензій одна до одної не мають.")
+    pdf.multi_cell(180, 10, txt="3. Цей Акт набуває чинності з дати його підписання уповноваженими представниками обох Сторін.")
+    pdf.multi_cell(180, 10, txt="4. Цей Акт складено у двох примірниках, які мають однакову юридичну силу для обох Сторін.")
     pdf.ln(10)
 
     pdf.cell(200, 10, txt="Місцезнаходження і реквізити сторін", ln=True)
