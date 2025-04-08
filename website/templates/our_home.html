@@ -46,7 +46,7 @@
     background-image: url('static/images/photo_main.jpg'); /* шлях до зображення */
     background-size: cover;
     background-position: left;
-    padding: 150px 80px; /* щоб був відступ */
+    padding: 150px 0px; /* щоб був відступ */
     }
 
     .hero {
@@ -56,17 +56,19 @@
       padding: 100px 80px;
       border-top-right-radius: 30px;
       border-bottom-right-radius: 30px;
-      width: 80%; /* наприклад, 70% ширини */
+      width: 70%; /* наприклад, 70% ширини */
     }
 
     .hero h1 {
       font-size: 70px;
       margin: 0;
+      font-family: 'Kharkiv Tone', sans-serif;
     }
 
     .hero h2 {
       font-size: 48px;
       margin-top: 20px;
+      font-family: 'Kharkiv Tone', sans-serif;
     }
 
     .button {
@@ -91,6 +93,7 @@
       border-radius: 30px;
       padding: 31px 80px;
       width: 48%;
+      
     }
 
     .cards {
@@ -101,11 +104,13 @@
     .card-title {
       font-size: 36px;
       font-weight: 700;
+      font-family: 'Mariupol', sans-serif;
     }
 
     .card-text {
       font-size: 30px;
       margin: 16px 0;
+      font-family: 'Mariupol', sans-serif;
     }
 
     .small-button {
@@ -133,25 +138,28 @@
 
     .about-text h3 {
       font-size: 48px;
+      font-family: 'Mariupol', sans-serif;
     }
 
     .about-text p {
       font-size: 40px;
-      margin: 20px 0;
+      margin: 50px 0;
+      font-family: 'Mariupol', sans-serif;
     }
 
     .about-text span {
       font-size: 32px;
+      font-family: 'Mariupol', sans-serif;
     }
 
     .log_pic{
-      width: 37%;
+      width: 36%;
     }
 
     *{
       padding: 0;
       margin: 0;
-      font-family: monospace;
+      font-family: 'Mariupol', sans-serif;
     }
 
     ul{
@@ -197,9 +205,9 @@
       <li>
         <a href='#'><img src="/static/images/log_in_out.png" class="log_pic" alt="picture"></a>
         <ul class="dropdown">
-          <li><a href="/login" class="card-text">Log_in</a></li>
-          <li><a href="/sign-up" class="card-text">Register</a></li>
-          <li><a href="/logout" class="card-text">Log_out</a></li>
+          <li><a href="/login" class="card-text" style="color: #35581A;">Log in</a></li>
+          <li><a href="/sign-up" class="card-text" style="color: #35581A;">Register</a></li>
+          <li><a href="/logout" class="card-text" style="color: #35581A;"> Log out</a></li>
         </ul>
       </li>
     </ul>
