@@ -44,21 +44,12 @@ def create_pdf():
 
     pdf.cell(200, 10, txt = 'Уклали цей Акт приймання-передачі гуманітарної благодійної допомоги про таке:', ln=True)
     pdf.cell(200, 10, txt = '1. Благодійник передав, а Отримувач отримав таку гуманітарну допомогу:', ln=True)
-    # pdf.cell(200, 10, txt=f"в особі {volunteer_name}, {volunteer_position}", ln=True)
-    # pdf.cell(200, 10, txt=f", що діє на підставі {volunteer_basis} з однієї сторони, та", ln=True)
-    # pdf.ln(10)
-    
-    # pdf.cell(200, 10, txt=f"{recipient_side}", ln=True)
-    # pdf.cell(200, 10, txt=f"в особі {recipient_name}, {recipient_position}", ln=True)
-    # pdf.cell(200, 10, txt=f"На підставі: {recipient_basis}", ln=True)
-    # pdf.ln(10)
 
     amount = 0
     money = 0
     rows = equipment.strip().split('\n')
 
-    # pdf.set_font("DejaVu", '', 7)
-    pdf.set_font('TimesNewRoman', '', 7)
+    # pdf.set_font('TimesNewRoman', '', 7)
     pdf.cell(10, 10, '№', border=1, align='C')
     pdf.cell(50, 10, 'Назва матеріальних цінностей', border=1, align='C')
     pdf.cell(30, 10, 'Одиниця виміру', border=1, align='C')
@@ -67,30 +58,25 @@ def create_pdf():
     pdf.cell(35, 10, 'Загальна вартість', border=1, align='C')
     pdf.ln()
 
-    # pdf.set_font("DejaVu", '', 10)
     for i, row in enumerate(rows, start=1):
         parts = [p.strip() for p in row.split(',')]
 
-        name, unit, q, p, total = parts
+        name, unit, q, p = parts
+        total = int(q) * int(p)
 
         pdf.cell(10, 8, str(i), border=1, align='C')
         pdf.cell(50, 8, name, border=1)
         pdf.cell(30, 8, unit, border=1, align='C')
         pdf.cell(20, 8, q, border=1, align='C')
         pdf.cell(35, 8, p, border=1, align='C')
-        pdf.cell(35, 8, total, border=1, align='C')
+        pdf.cell(35, 8, str(total), border=1, align='C')
         pdf.ln()
-
 
         amount += int(q)
         money += int(total)
 
-    # pdf.set_font("DejaVu", '', 10)
-    pdf.set_font('TimesNewRoman', '', 12)
     pdf.cell(180, 10, txt=f"УСЬОГО: {amount} шт. {money} грн", ln=True)
 
-    # pdf.set_font('DejaVu', '', 12)
-    pdf.set_font('TimesNewRoman', '', 12)
     pdf.ln(10)
     pdf.multi_cell(180, 10, txt="2. Матеріальні цінності передано в належному стані, Сторони претензій одна до одної не мають.")
     pdf.multi_cell(180, 10, txt="3. Цей Акт набуває чинності з дати його підписання уповноваженими представниками обох Сторін.")
@@ -99,11 +85,6 @@ def create_pdf():
 
     pdf.cell(200, 10, txt="Місцезнаходження і реквізити сторін", ln=True)
     pdf.cell(200, 10, txt="БЛАГОДІЙНИК _______________________ ОТРИМУВАЧ ДОПОМОГИ _________________________", ln=True)
-    # pdf.cell(200, 10, txt="ОТРИМУВАЧ ДОПОМОГИ ______________________________", ln=True, align='R')
-
-    # pdf.cell(200, 10, txt="Звіт", ln=True, align='C')
-    # pdf.cell(200, 10, txt="Необхідне обладнання: ", ln=True)
-    # pdf.cell(200, 10, txt="Дата: " + date, ln=True)
 
     pdf_output = io.BytesIO()
     pdf_bytes = pdf.output(dest='S').encode('latin-1')
