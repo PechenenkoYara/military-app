@@ -49,7 +49,7 @@ def create_pdf():
     money = 0
     rows = equipment.strip().split('\n')
 
-    # pdf.set_font('TimesNewRoman', '', 7)
+    pdf.set_font('TimesNewRoman', '', 8)
     pdf.cell(10, 10, '№', border=1, align='C')
     pdf.cell(50, 10, 'Назва матеріальних цінностей', border=1, align='C')
     pdf.cell(30, 10, 'Одиниця виміру', border=1, align='C')
@@ -64,6 +64,7 @@ def create_pdf():
         name, unit, q, p = parts
         total = int(q) * int(p)
 
+        pdf.set_font('TimesNewRoman', '', 12)
         pdf.cell(10, 8, str(i), border=1, align='C')
         pdf.cell(50, 8, name, border=1)
         pdf.cell(30, 8, unit, border=1, align='C')
