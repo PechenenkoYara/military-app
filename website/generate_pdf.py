@@ -30,12 +30,11 @@ def create_pdf():
 
     pdf = FPDF()
     pdf.add_page()
-    pdf.add_font('DejaVu', '', 'website/static/fonts/DejaVuSans.ttf', uni=True)
-    pdf.set_font('DejaVu', '', 12)
-    # pdf.set_font("Arial", size=12)
+    pdf.add_font('TimesNewRoman', '', 'website/static/fonts/times.ttf', uni=True)
+    pdf.set_font('TimesNewRoman', '', 12)
 
     pdf.cell(200, 10, txt="АКТ приймання-передачі гуманітарної (благодійної) допомоги", ln=True, align='C')
-    pdf.cell(200, 10, txt=f'{date}року', ln=True, align='C')
+    pdf.cell(200, 10, txt=f'{date} року', ln=True, align='C')
     pdf.cell(200, 10, txt=f"м. {city}", ln=True, align='C')
     pdf.ln(3)
     usable_width = pdf.w - 2 * pdf.l_margin
@@ -58,7 +57,8 @@ def create_pdf():
     money = 0
     rows = equipment.strip().split('\n')
 
-    pdf.set_font("DejaVu", '', 7)
+    # pdf.set_font("DejaVu", '', 7)
+    pdf.set_font('TimesNewRoman', '', 7)
     pdf.cell(10, 10, '№', border=1, align='C')
     pdf.cell(50, 10, 'Назва матеріальних цінностей', border=1, align='C')
     pdf.cell(30, 10, 'Одиниця виміру', border=1, align='C')
@@ -67,7 +67,7 @@ def create_pdf():
     pdf.cell(35, 10, 'Загальна вартість', border=1, align='C')
     pdf.ln()
 
-    pdf.set_font("DejaVu", '', 10)
+    # pdf.set_font("DejaVu", '', 10)
     for i, row in enumerate(rows, start=1):
         parts = [p.strip() for p in row.split(',')]
 
@@ -85,10 +85,12 @@ def create_pdf():
         amount += int(q)
         money += int(total)
 
-    pdf.set_font("DejaVu", '', 10)
+    # pdf.set_font("DejaVu", '', 10)
+    pdf.set_font('TimesNewRoman', '', 12)
     pdf.cell(180, 10, txt=f"УСЬОГО: {amount} шт. {money} грн", ln=True)
 
-    pdf.set_font('DejaVu', '', 12)
+    # pdf.set_font('DejaVu', '', 12)
+    pdf.set_font('TimesNewRoman', '', 12)
     pdf.ln(10)
     pdf.multi_cell(180, 10, txt="2. Матеріальні цінності передано в належному стані, Сторони претензій одна до одної не мають.")
     pdf.multi_cell(180, 10, txt="3. Цей Акт набуває чинності з дати його підписання уповноваженими представниками обох Сторін.")
@@ -96,7 +98,7 @@ def create_pdf():
     pdf.ln(10)
 
     pdf.cell(200, 10, txt="Місцезнаходження і реквізити сторін", ln=True)
-    pdf.cell(200, 10, txt="БЛАГОДІЙНИК ______________________________  ОТРИМУВАЧ ДОПОМОГИ ______________________________", ln=True)
+    pdf.cell(200, 10, txt="БЛАГОДІЙНИК _______________________ ОТРИМУВАЧ ДОПОМОГИ _________________________", ln=True)
     # pdf.cell(200, 10, txt="ОТРИМУВАЧ ДОПОМОГИ ______________________________", ln=True, align='R')
 
     # pdf.cell(200, 10, txt="Звіт", ln=True, align='C')
