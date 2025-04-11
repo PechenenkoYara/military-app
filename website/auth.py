@@ -114,22 +114,28 @@ def edit():
         current_user.last_name = request.form.get('last_name')
         current_user.occupation = request.form.get('occupation')
         current_user.notes = request.form.get('notes')
-        db.session.commit()
         old_p = request.form.get("old_password")
         new_p = request.form.get("new_password")
         check_p = request.form.get("check_password")
 
         if old_p or new_p or check_p:
             if not (old_p and new_p and check_p):
-                fields = {old_p: "Старий пароль", 
-                          new_p: "Новий пароль", 
+                fields = {old_p: "Старий пароль",
+                          new_p: "Новий пароль",
                           check_p: "Пароль на підтвердження"}
                 empty_f = [value for key, value in fields.items() if not key]
                 return f"Ви не заповнили пол{'я' if len(empty_f)>>1 else 'е'}: {empty_f}/."
-                return redirect(url_for('auth.edit'))
+            elif len(new_p) < 7 or len(check_p) < 7:
+                return 'Password must be at least 7 characters.'
+            elif not check_password_hash(current_user.password, old_p):
+                return 'The given password does not match your current password.'
+            elif old_p == new_p:
+                return "Your new password must be different from the old one"
+            elif new_p != check_p:
+                return 'New passwords do not match'
             else:
-                ...
-
+                current_user.password = generate_password_hash(new_p)
+                db.session.commit()
         flash('Ваші дані профілю були оновлені!', category='success')
         return redirect(url_for('auth.profile'))
 

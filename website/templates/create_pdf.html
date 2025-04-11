@@ -37,12 +37,44 @@
 </head>
 <body>
 
-<h1>Створи свій звіт (PDF)</h1>
+<h1>Створи акт приймання-передачі гуманітарної допомоги</h1>
 
 <form action="/create_pdf" method="post">
-  <textarea name="text_content" placeholder="Введи свій текст тут..."></textarea><br>
+  <label for="date">Дата:</label><br>
+  <input type="text" name="date" id="date" placeholder='Введіть дату у форматі "13" квітня 2025' style="width: 400px;" required><br>
+
+  <label for="city">Місто:</label><br>
+  <input type="text" name="city" id="city" placeholder="Введіть місто" required><br>
+
+  <label for="volunteer_side">Назва благодійника:</label><br>
+  <input type="text" name="volunteer_side" id="volunteer_side" required><br>
+
+  <label for="volunteer_name">Представник благодійника (ПІБ):</label><br>
+  <input type="text" name="volunteer_name" id="volunteer_name" required><br>
+
+  <label for="volunteer_position">Посада представника благодійника:</label><br>
+  <input type="text" name="volunteer_position" id="volunteer_position" required><br>
+
+  <label for="volunteer_basis">На підставі:</label><br>
+  <input type="text" name="volunteer_basis" id="volunteer_basis" required><br>
+
+  <label for="recipient_side">Назва отримувача:</label><br>
+  <input type="text" name="recipient_side" id="recipient_side" required><br>
+
+  <label for="recipient_name">Представник отримувача (ПІБ):</label><br>
+  <input type="text" name="recipient_name" id="recipient_name" required><br>
+
+  <label for="recipient_position">Посада представника отримувача:</label><br>
+  <input type="text" name="recipient_position" id="recipient_position" required><br>
+
+  <label for="recipient_basis">На підставі:</label><br>
+  <input type="text" name="recipient_basis" id="recipient_basis" required><br>
+
+  <label for="items">Перелік матеріальних цінностей:</label><br>
+  <small>Назва, одиниця, кількість, ціна за 1. Один запис на рядок.</small>
+  <textarea name="items" id="items" placeholder="Назва, одиниця, кількість, ціна за 1" font-size = 5px required></textarea><br>
+
   <button type="submit">Згенерувати PDF</button>
 </form>
-
 </body>
 </html>
