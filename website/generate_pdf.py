@@ -1,4 +1,3 @@
-# from flask import Blueprint, render_template, request, flash, redirect, url_for
 from flask import Blueprint, Flask, render_template, request, send_file
 from fpdf import FPDF
 import io
