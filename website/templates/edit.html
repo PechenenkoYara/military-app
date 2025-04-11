@@ -100,6 +100,8 @@
         <img src="{{ image_file }}" alt="Profile Picture">
         <div class="right_frame">
             <form method="POST">
+                <p>Фото профілю</p>
+                <input type="file" name="profile_picture" accept="image/*">
                 <p>Прізвище</p>
                 <input type="text" name="last_name" value="{{ current_user.last_name }}" placeholder="{{ current_user.last_name }}">
                 <p>Ім'я</p>
