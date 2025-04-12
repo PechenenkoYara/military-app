@@ -22,4 +22,3 @@ def filter_input(users_input:str) -> list:
                     break
 
     return list(result)
-
