@@ -1,20 +1,17 @@
-from flask import Blueprint, render_template, request, flash, redirect, url_for
-from .data_checking import is_name_valid, is_valid_email, is_password_incorrect, is_valid_phone_number
-from .contact_filter import filter_input
-from .models import User, Contacts
-from werkzeug.security import generate_password_hash, check_password_hash
-from . import db
-from flask_login import login_user, login_required, logout_user, current_user
-
 import os
 import secrets
 from PIL import Image
 from flask import current_app
 
-
+from flask import Blueprint, render_template, request, flash, redirect, url_for
+from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import login_user, login_required, logout_user, current_user
+from . import db
+from .models import User, Contacts
+from .data_checking import is_name_valid, is_valid_email, is_password_incorrect, is_valid_phone_number
+from .contact_filter import filter_input, does_fit, CATEGORIES
 
 auth = Blueprint('auth', __name__)
-
 
 
 UPLOAD_FOLDER = 'static/images'
@@ -98,11 +95,9 @@ def sign_up():
         elif password1 != password2:
             flash('Passwords don\'t match.', category='error')
         else:
-            new_user = User(email=email, \
-                            first_name=first_name, \
-                            last_name=last_name, \
-                            occupation=occupation,\
-                            password=generate_password_hash(password1, method='pbkdf2:sha256'))
+            new_user = User(email=email, first_name=first_name, \
+                        last_name=last_name, occupation=occupation,\
+                        password=generate_password_hash(password1, method='pbkdf2:sha256'))
             db.session.add(new_user)
             db.session.commit()
             login_user(new_user, remember=True)
@@ -128,23 +123,38 @@ def profile():
 def contacts():
     user_contacts = Contacts.query.filter_by(user_id=current_user.id).all()
     if request.method == 'POST':
-        name = request.form.get('name')
-        number = request.form.get('number')
-        occupation = request.form.get('occupation')
+        action = request.form.get('action')
 
-        if not is_valid_phone_number(number):
-            flash("The phone number is incorrect", category='error')
+        if action == 'add':
+            name = request.form.get('name')
+            number = request.form.get('number')
+            occupation = request.form.get('occupation')
 
-        new_contact = Contacts(
-            name=name,
-            number=number,
-            occupation=occupation,
-            user_id=current_user.id
-        )
+            if not name or not number or not occupation:
+                flash("Ви не заповнили усі поля, спробуйте ще раз додати контакт", category='error')
+            elif not is_valid_phone_number(number):
+                flash("The phone number is incorrect", category='error')
+            elif Contacts.query.filter_by(user_id=current_user.id, number=number).first():
+                flash("Контакт з таким номером телефону вже існує", category='error')
+            else:
+                new_contact = Contacts(name=name, number=number,
+                    occupation=occupation, user_id=current_user.id)
+                db.session.add(new_contact)
+                db.session.commit()
+                return redirect(url_for('auth.contacts'))
 
-        db.session.add(new_contact)
-        db.session.commit()
-        return redirect(url_for('auth.contacts'))
+        elif action == 'filter':
+            selected_categories = request.form.getlist('filter')
+
+            if selected_categories:
+                user_contacts = [
+                    contact for contact in user_contacts
+                    if any(
+                        category in filter_input(contact.occupation)
+                        for category in selected_categories
+                    )
+                ]
+
     return render_template('contacts.html', title='Contacts', contacts=user_contacts)
 
 
@@ -180,7 +190,8 @@ def edit():
                 i.save(picture_path)
 
                 if current_user.image_file != 'profile.png':
-                    old_pic_path = os.path.join(current_app.root_path, 'static', 'images', current_user.image_file)
+                    old_pic_path = os.path.join(current_app.root_path, 
+                                        'static', 'images', current_user.image_file)
                     if os.path.exists(old_pic_path):
                         os.remove(old_pic_path)
 
@@ -194,20 +205,17 @@ def edit():
             if not (old_p and new_p and check_p):
                 flash("Please fill all password fields", "error")
                 return redirect(url_for('auth.edit'))
-
-            if is_password_incorrect(new_p):
+            elif is_password_incorrect(new_p):
                 flash(is_password_incorrect(new_p), "error")
                 return redirect(url_for('auth.edit'))
-
-            if not check_password_hash(current_user.password, old_p):
+            elif not check_password_hash(current_user.password, old_p):
                 flash("Current password is incorrect", "error")
                 return redirect(url_for('auth.edit'))
-
-            if new_p != check_p:
+            elif new_p != check_p:
                 flash("New passwords don't match", "error")
                 return redirect(url_for('auth.edit'))
-
-            current_user.password = generate_password_hash(new_p)
+            else:
+                current_user.password = generate_password_hash(new_p)
 
         db.session.commit()
         flash('Профіль успішно оновлено!', 'success')
