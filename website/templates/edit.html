@@ -99,7 +99,7 @@
     <div class="profile_contain">
         <img src="{{ image_file }}" alt="Profile Picture">
         <div class="right_frame">
-            <form method="POST">
+            <form method="POST" enctype="multipart/form-data">
                 <p>Прізвище</p>
                 <input type="text" name="last_name" value="{{ current_user.last_name }}" placeholder="{{ current_user.last_name }}">
                 <p>Ім'я</p>
@@ -107,13 +107,15 @@
                 <p>Вид діяльності</p>
                 <input type="text" name="occupation" value="{{ current_user.occupation }}" placeholder="{{ current_user.occupation }}">
                 <p>Впишіть старий пароль, щоб встановити новий</p>
-                <input type="text" name="old_password" value="{{ current_user.password }}" placeholder="Старий пароль">
+                <input type="text" name="old_password" placeholder="Старий пароль">
                 <p>Новий пароль</p>
                 <input type="text" name="new_password" placeholder="••••••••">
                 <p>Підтвердіть пароль</p>
                 <input type="text" name="check_password" placeholder="••••••••">
                 <p>Про себе</p>
                 <textarea name="notes" placeholder="{{ current_user.notes }}">{{ current_user.notes }}</textarea>
+                <p>Фото профілю</p>
+                <input type="file" name="profile_picture" accept="image/*">
                 <div class="button-container">
                     <button type="submit" class="small-button">Зберегти зміни</button>
                     <a href="{{ url_for('auth.profile') }}" class="small-button" style="background: gray;">Скасувати</a>

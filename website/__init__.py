@@ -26,6 +26,8 @@ def create_app():
     with app.app_context():
         db.create_all()
 
+    app.config['UPLOAD_FOLDER'] = 'static/images'
+    app.config['MAX_CONTENT_LENGTH'] = 2 * 1024 * 1024
     login_manager = LoginManager()
     login_manager.login_view = 'auth.login'
     login_manager.init_app(app)

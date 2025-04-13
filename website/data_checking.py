@@ -51,24 +51,21 @@ def is_name_valid(name: str) -> bool:
         return False
     if name[0].islower():
         return False
+    if len(name) == 1 and name.isupper():
+        return True
+
+    if not name or len(name) > 150:
+        return False
 
     allowed_separators = "-' "
-    prev_char = ""
     for ch in name:
         if not (ch.isalpha() or ch in allowed_separators):
             return False
-        if ch in allowed_separators and prev_char in allowed_separators:
-            return False
-        prev_char = ch
 
     parts = name.replace("-", " ").replace("'", " ").split()
     for part in parts:
-        if len(part) == 1:
-            if not part.isupper():
-                return False
-        elif not part[0].isupper() or not part[1:].islower():
+        if len(part) < 2:
             return False
-
     return True
 
 def is_password_incorrect(password: str):
