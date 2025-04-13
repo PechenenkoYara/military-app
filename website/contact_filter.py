@@ -37,7 +37,7 @@ def filter_input(users_input: str) -> list:
     return list(result) if result else ['Інше']
 
 def does_fit(list1: list, list2: list) -> bool:
-    """checks the intersection of two lists"""
+    'checks the intersection of two lists'
     for el in list1:
         if el in list2:
             return True
