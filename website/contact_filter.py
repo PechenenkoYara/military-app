@@ -13,10 +13,7 @@ CATEGORIES = {
 
 
 def read_files_and_categorize(file_paths:dict):
-    """
-    Функція відкриває файли за вказаними шляхами, шукає ключові слова з кожної категорії 
-    та заповнює словник CATEGORIES вмістом файлів.
-    """
+    """Function to filter contacts by their seprciality"""
     for category, file_path in file_paths.items():
         with open(file_path, 'r', encoding='utf-8') as file:
             for line in file:
@@ -40,7 +37,7 @@ def filter_input(users_input: str) -> list:
     return list(result) if result else ['Інше']
 
 def does_fit(list1: list, list2: list) -> bool:
-    'Checks the intersection of two lists'
+    """checks the intersection of two lists"""
     for el in list1:
         if el in list2:
             return True
