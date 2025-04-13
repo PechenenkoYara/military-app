@@ -43,7 +43,7 @@ def is_valid_name(name: str) -> bool:
         return False
     if len(name) == 1 and name.isupper():
         return True
-    
+
     if not name or len(name) > 150:
         return False
 
@@ -56,7 +56,6 @@ def is_valid_name(name: str) -> bool:
     for part in parts:
         if len(part) < 2:
             return False
-    
     return True
 
 
@@ -85,3 +84,9 @@ def is_valid_last_name(last_name: str) -> bool:
             return False
 
     return True
+
+def is_name_valid(name: str) -> bool:
+    return True
+
+def is_password_incorrect(password: str) -> bool | str:
+    return 0

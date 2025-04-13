@@ -54,7 +54,7 @@
     .small-button {
         background: rgba(53, 88, 26, 1);
         border-radius: 30px;
-        padding: 10px 20px; /* Adjust padding for smaller button */
+        padding: 10px 20px;
         text-align: center;
         line-height: normal;
         font-size: 1em;
@@ -109,6 +109,8 @@
         height: fit-content;
         margin: 3%;
         box-shadow: 2px 2px 5px rgba(190, 203, 179, 1);
+        display: grid;
+        grid-template-rows: auto 1fr auto;
     }
 
     .right-column h3 {
@@ -121,6 +123,7 @@
         list-style: none;
         padding: 0;
         margin: 0;
+        margin-bottom: 30px;
     }
 
     .right-column ul li {
@@ -143,7 +146,7 @@
                     <input type="text" name="occupation" placeholder="Спеціалізація">
                     <input type="text" name="number" placeholder="Номер телефону">
                 </div>
-                <button type="submit" class="small-button">додати</button>
+                <button type="submit" name="action" value="add" class="small-button">додати</button>
             </form>
         </div>
         <div class="contacts-table-container">
@@ -170,18 +173,24 @@
         </div>
     </div>
     <div class="right-column">
-        <h3>Фільтр</h3>
-        <ul>
-            <li><input type="checkbox" id="filter-автомобілі" name="filter" value="Автомобілі"> <label for="filter-автомобілі">Автомобілі</label></li>
-            <li><input type="checkbox" id="filter-медикаменти" name="filter" value="Медикаменти"> <label for="filter-медикаменти">Медикаменти</label></li>
-            <li><input type="checkbox" id="filter-одяг" name="filter" value="Одяг і омуніція"> <label for="filter-одяг">Одяг і омуніція</label></li>
-            <li><input type="checkbox" id="filter-сітки" name="filter" value="Сітки"> <label for="filter-сітки">Сітки</label></li>
-            <li><input type="checkbox" id="filter-3д-друк" name="filter" value="3D друк"> <label for="filter-3д-друк">3D друк</label></li>
-            <li><input type="checkbox" id="filter-техніка" name="filter" value="Техніка"> <label for="filter-техніка">Техніка</label></li>
-            <li><input type="checkbox" id="filter-кошти" name="filter" value="Кошти"> <label for="filter-кошти">Кошти</label></li>
-            <li><input type="checkbox" id="filter-продукти" name="filter" value="Продукти"> <label for="filter-продукти">Продукти</label></li>
-            <li><input type="checkbox" id="filter-all" name="filter" value="all" checked> <label for="filter-all">Інше</label></li>
-        </ul>
+        <div class="contact-form">
+            <form method="POST">
+                <h3 style="display: flex; justify-content: center; margin-top: 10px;">Фільтри</h3>
+                <ul>
+                    <li><input type="checkbox" id="filter-Aвтомобілі" name="filter" value="Автомобілі"> <label for="filter-Aвтомобілі">Автомобілі</label></li>
+                    <li><input type="checkbox" id="filter-Медицина та медичне обладнання" name="filter" value="Медицина та медичне обладнання"> <label for="filter-Медицина та медичне обладнання">Медицина та медичне обладнання</label></li>
+                    <li><input type="checkbox" id="filter-Одяг і амуніція" name="filter" value="Одяг і амуніція"> <label for="filter-Одяг і амуніція">Одяг і амуніція</label></li>
+                    <li><input type="checkbox" id="filter-Сітки" name="filter" value="Сітки"> <label for="filter-Сітки">Сітки</label></li>
+                    <li><input type="checkbox" id="filter-3D-друк" name="filter" value="3D друк"> <label for="filter-3D-друк">3D-друк</label></li>
+                    <li><input type="checkbox" id="filter-Кошти" name="filter" value="Кошти"> <label for="filter-Кошти">Кошти</label></li>
+                    <li><input type="checkbox" id="filter-Продукти" name="filter" value="Продукти"> <label for="filter-Продукти">Продукти</label></li>
+                    <li><input type="checkbox" id="filter-Інше" name="filter" value="Інше"> <label for="filter-Інше">Інше</label></li>
+                </ul>
+                <div style="display: flex; justify-content: center; margin-top: auto; align-self: center;">
+                    <button type="submit" name="action" value="filter" class="small-button">фільтрувати</button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 
