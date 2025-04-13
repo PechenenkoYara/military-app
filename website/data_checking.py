@@ -88,12 +88,6 @@ def is_password_incorrect(password: str):
     if not any(ch.isalpha() for ch in password):
         return "Password must include at least one letter"
 
-    if not any(ch.islower() for ch in password):
-        return "Password must include at least one lowercase letter"
-
-    if not any(ch.isupper() for ch in password):
-        return "Password must include at least one uppercase letter"
-
     if not any(ch in special_characters for ch in password):
         return "Password must include at least one special character"
 
