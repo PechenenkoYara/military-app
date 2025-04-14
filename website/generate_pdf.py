@@ -64,6 +64,7 @@ def create_pdf():
         if len(parts) != 4:
             flash("Будь ласка, заповни у  форматі 'Назва, одиниця, кількість, ціна за 1. Один запис на рядок.'", category='error')
             error = True
+            continue
         name, unit, q, p = parts
         if not any(c.isalpha() for c in name):
             flash("Назва повинна містити хоча б одну літеру.", category='error')
