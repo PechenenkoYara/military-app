@@ -6,27 +6,32 @@
   <title>свій до свого по своє</title>
   <link href="https://fonts.googleapis.com/css2?family=Mariupol&display=swap" rel="stylesheet">
   <style>
-    
     @font-face {
-    font-family: 'Kharkiv Tone';
-    src: url('fonts/kharkiv-tone.woff2') format('woff2'),
-         url('fonts/kharkiv-tone.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-  }
-  :root {
-    --font-family-kharkiv-tone: 'Kharkiv Tone', sans-serif;
-    --font-family-roboto: 'Roboto', sans-serif;
-    --text-rgb-53-88-26: rgba(53, 88, 26, 1);
-    --text-black: rgba(0, 0, 0, 1);
-    --text-white: rgba(255, 255, 255, 1);
-    --text-rgb-114-114-114: rgba(114, 114, 114, 1);
-  }
+      font-family: 'Kharkiv Tone';
+      src: url('fonts/kharkiv-tone.woff2') format('woff2'),
+           url('fonts/kharkiv-tone.woff') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    :root {
+      --font-family-kharkiv-tone: 'Kharkiv Tone', sans-serif;
+      --font-family-roboto: 'Roboto', sans-serif;
+      --text-rgb-53-88-26: rgba(53, 88, 26, 1);
+      --text-black: rgba(0, 0, 0, 1);
+      --text-white: rgba(255, 255, 255, 1);
+      --text-rgb-114-114-114: rgba(114, 114, 114, 1);
+    }
+
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+      font-family: 'Mariupol', sans-serif;
+    }
 
     body {
-      margin: 0;
       background: #EBEBEB;
-      font-family: 'Mariupol', sans-serif;
     }
 
     header, footer {
@@ -43,10 +48,10 @@
     }
 
     .hero-wrapper {
-    background-image: url('static/images/photo_main.jpg'); /* шлях до зображення */
-    background-size: cover;
-    background-position: left;
-    padding: 150px 0px; /* щоб був відступ */
+      background-image: url('static/images/photo_main.jpg');
+      background-size: cover;
+      background-position: left;
+      padding: 150px 0;
     }
 
     .hero {
@@ -56,19 +61,17 @@
       padding: 100px 80px;
       border-top-right-radius: 30px;
       border-bottom-right-radius: 30px;
-      width: 70%; /* наприклад, 70% ширини */
+      width: 70%;
     }
 
     .hero h1 {
       font-size: 70px;
       margin: 0;
-      font-family: 'Kharkiv Tone', sans-serif;
     }
 
     .hero h2 {
       font-size: 48px;
       margin-top: 20px;
-      font-family: 'Kharkiv Tone', sans-serif;
     }
 
     .button {
@@ -88,48 +91,47 @@
       color: #050505;
     }
 
+    .cards {
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
     .card {
       background: #EBEBEB;
       border-radius: 30px;
       padding: 31px 80px;
       width: 48%;
-      
-    }
-
-    .cards {
-      display: flex;
-      gap: 5%;
     }
 
     .card-title {
       font-size: 36px;
       font-weight: 700;
-      font-family: 'Mariupol', sans-serif;
     }
 
     .card-text {
       font-size: 30px;
       margin: 16px 0;
-      font-family: 'Mariupol', sans-serif;
     }
 
     .small-button {
       background: #C7D1D9;
       border-radius: 30px;
-      width: 201px;
-      height: 66px;
-      padding: 10px 30px;
+      width: auto;
+      height: auto;
+      padding: 14px 30px;
       text-align: center;
-      line-height: 66px;
-      font-size: 30px;
+      font-size: 24px;
       color: #050505;
       text-decoration: none;
+      display: inline-block;
     }
 
     .about {
       display: flex;
       justify-content: space-between;
       padding: 100px 80px;
+      align-items: center;
     }
 
     .about-text {
@@ -138,31 +140,28 @@
 
     .about-text h3 {
       font-size: 48px;
-      font-family: 'Mariupol', sans-serif;
     }
 
     .about-text p {
       font-size: 40px;
       margin: 50px 0;
-      font-family: 'Mariupol', sans-serif;
     }
 
     .about-text span {
       font-size: 32px;
-      font-family: 'Mariupol', sans-serif;
     }
 
-    .log_pic{
-      width: 36%;
+    .ribbon {
+      width: 40%;
+      border-radius: 20px;
     }
 
-    *{
-      padding: 0;
-      margin: 0;
-      font-family: 'Mariupol', sans-serif;
+    .log_pic {
+      width: 36px;
     }
 
-    ul{
+    /* MENU */
+    ul {
       list-style: none;
     }
 
@@ -171,7 +170,7 @@
       position: relative;
     }
 
-    ul li a{
+    ul li a {
       display: block;
       padding: 20px 25px;
       text-decoration: none;
@@ -194,26 +193,146 @@
     ul li:hover ul.dropdown {
       display: block;
     }
+
+    /* BURGER MENU (HIDDEN BY DEFAULT) */
+    .menu-icon {
+      display: none;
+      cursor: pointer;
+      width: 30px;
+    }
+
+    /* MEDIA QUERIES */
+    @media (max-width: 768px) {
+      header, footer {
+        flex-direction: column;
+        padding: 20px;
+        text-align: center;
+      }
+
+      .logo-text {
+        font-size: 24px;
+        margin-bottom: 10px;
+      }
+
+      .menu-icon {
+        display: block;
+      }
+
+      ul {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        padding: 0;
+      }
+
+      ul.show {
+        display: flex;
+      }
+
+      ul li {
+        display: block;
+      }
+
+      .log_pic {
+        width: 32px;
+      }
+
+      .hero-wrapper {
+        padding: 60px 0;
+        background-position: center;
+      }
+
+      .hero {
+        width: 90%;
+        padding: 60px 20px;
+        border-radius: 20px;
+      }
+
+      .hero h1 {
+        font-size: 42px;
+      }
+
+      .hero h2 {
+        font-size: 32px;
+      }
+
+      .button {
+        padding: 14px 30px;
+        font-size: 22px;
+      }
+
+      .section {
+        padding: 80px 20px;
+      }
+
+      .cards {
+        flex-direction: column;
+        gap: 30px;
+      }
+
+      .card {
+        width: 100%;
+        padding: 30px 20px;
+      }
+
+      .card-title {
+        font-size: 28px;
+      }
+
+      .card-text {
+        font-size: 22px;
+      }
+
+      .small-button {
+        font-size: 20px;
+      }
+
+      .about {
+        flex-direction: column;
+        padding: 60px 20px;
+        text-align: center;
+      }
+
+      .about-text {
+        width: 100%;
+      }
+
+      .about-text h3 {
+        font-size: 32px;
+      }
+
+      .about-text p {
+        font-size: 24px;
+      }
+
+      .about-text span {
+        font-size: 20px;
+      }
+
+      .ribbon {
+        width: 90%;
+        margin-top: 30px;
+      }
+    }
   </style>
 </head>
 <body>
 
 <header>
   <div class="logo-text">свій до свого по своє</div>
-  <div>
-    <ul>
-      <li>
-        <a href='#'><img src="/static/images/log_in_out.png" class="log_pic" alt="picture"></a>
-        <ul class="dropdown">
-          <li><a href="/login" class="card-text" style="color: #35581A;">Log in</a></li>
-          <li><a href="/sign-up" class="card-text" style="color: #35581A;">Register</a></li>
-          <li><a href="/logout" class="card-text" style="color: #35581A;"> Log out</a></li>
-        </ul>
-      </li>
-    </ul>
-  </div>
-</div>
+  <img src="/static/images/log_in_out.png" class="menu-icon" alt="menu" onclick="toggleMenu()">
+  <ul id="nav-menu">
+    <li>
+      <a href="#"><img src="/static/images/log_in_out.png" class="log_pic" alt="picture"></a>
+      <ul class="dropdown">
+        <li><a href="/login" class="card-text" style="color: #35581A;">Log in</a></li>
+        <li><a href="/sign-up" class="card-text" style="color: #35581A;">Register</a></li>
+        <li><a href="/logout" class="card-text" style="color: #35581A;">Log out</a></li>
+      </ul>
+    </li>
+  </ul>
 </header>
+
 <div class="hero-wrapper">
   <div class="hero">
     <h1>Волонтери волонтерам</h1>
@@ -249,6 +368,13 @@
 <footer>
   <div class="logo-text">волонтер_апка</div>
 </footer>
+
+<script>
+  function toggleMenu() {
+    const menu = document.getElementById("nav-menu");
+    menu.classList.toggle("show");
+  }
+</script>
 
 </body>
 </html>
