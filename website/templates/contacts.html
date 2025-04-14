@@ -16,6 +16,7 @@
         box-sizing: border-box;
         flex-grow: 1;
         align-items: stretch;
+        padding: 20px;
     }
 
     h1 {
@@ -100,7 +101,7 @@
     }
 
     .right-column {
-        width: 20%;
+        max-width: 400px;
         padding: 15px;
         background-color: #f9f9f9;
         border: 1px solid #eee;
@@ -141,11 +142,64 @@
         justify-content: center;
         align-items: center;
     }
+
+    @media (max-width: 768px) {
+        .full-height-container {
+            flex-direction: column;
+            padding: 10px;
+        }
+
+        .left-column, .right-column {
+            width: 100%;
+            margin: 0 0 20px 0;
+            padding: 10px;
+        }
+
+        .fieldset_container {
+            flex-direction: column;
+        }
+
+        .fieldset_container input[type="text"] {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .contacts-table-container {
+            overflow-x: auto;
+        }
+
+        .contacts-table th, .contacts-table td {
+            padding: 8px 10px;
+            font-size: 0.9em;
+        }
+
+        .small-button {
+            width: 100%;
+            padding: 12px;
+            font-size: 1.1em;
+        }
+
+        .right-column {
+            border-radius: 10px;
+            box-shadow: none;
+            border: none;
+        }
+
+        .right-column h3 {
+            font-size: 1em;
+        }
+
+        .right-column ul li {
+            font-size: 0.9em;
+        }
+    }
 </style>
+
 <div class="title_box">
     <a href="/" class="home_sign_img"><img src="/static/images/home_sign.png"></a>
     <a href="profile"><div class="title_a_block">Мій профіль</div></a>
 </div>
+
 <div class="full-height-container">
     <div class="left-column">
         <div class="contact-form">
@@ -181,6 +235,7 @@
             </table>
         </div>
     </div>
+
     <div class="right-column">
         <div class="contact-form">
             <form method="POST">
@@ -202,5 +257,4 @@
         </div>
     </div>
 </div>
-
 {% endblock %}
