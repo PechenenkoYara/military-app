@@ -12,7 +12,7 @@
     body {
       font-family: 'Mariupol', sans-serif;
       background-color: #EBEBEB;
-      padding: 20px;
+
       margin: 0;
     }
 
@@ -41,6 +41,20 @@
     .form-group label {
       margin-bottom: 5px;
       font-weight: bold;
+    }
+
+    .title_box {
+        width: 100%;
+        height: 90px;
+        display: flex;
+        background-color: rgba(53, 88, 26, 1);
+    }
+    .home_sign_img img {
+        width: 40%;
+        height: auto;
+        margin-top: 20%;
+        margin-left: 30%;
+
     }
 
     .form-group input,
@@ -87,11 +101,42 @@
         padding: 10px;
       }
     }
+    .flashes {
+      list-style: none;
+      padding: 0;
+      margin: 20px auto;
+      max-width: 700px;
+    }
+
+    .flashes li {
+      padding: 10px 15px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+
+    .flashes li.error {
+      background-color: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+
   </style>
 </head>
 <body>
-
+<div class="title_box">
+    <a href="/" class="home_sign_img"><img src="/static/images/home_sign.png"></a>
+</div>
 <h1>Створи акт приймання-передачі гуманітарної допомоги</h1>
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <ul class="flashes">
+      {% for category, message in messages %}
+        <li class="{{ category }}">{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
 
 <form action="/create_pdf" method="post">
   <div class="form-group">
