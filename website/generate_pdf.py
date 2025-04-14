@@ -1,4 +1,4 @@
-from flask import Blueprint, Flask, render_template, request, send_file
+from flask import Blueprint, Flask, render_template, request, send_file, flash, redirect, url_for
 from fpdf import FPDF
 import io
 
@@ -40,6 +40,51 @@ def create_pdf():
     recipient_basis = request.form['recipient_basis']
     equipment = request.form['items']
 
+    fields = {'city': city,
+    'volunteer_side': volunteer_side,
+    'volunteer_name': volunteer_name,
+    'volunteer_position': volunteer_position,
+    'volunteer_basis': volunteer_basis,
+    'recipient_side': recipient_side,
+    'recipient_name': recipient_name,
+    'recipient_position': recipient_position,
+    'recipient_basis': recipient_basis}
+
+    error = False
+    for key, value in fields.items():
+        if len(value.strip()) <= 2:
+            flash(f"Поле '{key}' повинно містити більше 2 символів.", category='error')
+            error = True
+        elif all(s.isnumeric() for s in value):
+            flash(f"Поле '{key}' повинно бути стрічкою.", category='error')
+            error = True
+    rows = equipment.strip().split('\n')
+    for row in rows:
+        parts = [p.strip() for p in row.split(',')]
+        if len(parts) != 4:
+            flash("Будь ласка, заповни у  форматі 'Назва, одиниця, кількість, ціна за 1. Один запис на рядок.'", category='error')
+            error = True
+        name, unit, q, p = parts
+        if not any(c.isalpha() for c in name):
+            flash("Назва повинна містити хоча б одну літеру.", category='error')
+            error = True
+        if not all(c.isalpha() for c in unit):
+            flash("Одиниця виміру повинна бути стрічкою.", category='error')
+            error = True
+        try:
+            float(p)
+        except ValueError:
+            flash("Ціна має бути задана числом", category='error')
+            error = True
+        try:
+            float(q)
+        except ValueError:
+            flash("Кількість має бути задана числом", category='error')
+            error = True
+
+    if error:
+        return redirect(url_for('generate_pdf.create_pdf_form'))
+
     pdf = FPDF()
     pdf.add_page()
     pdf.add_font('TimesNewRoman', '', 'website/static/fonts/times.ttf', uni=True)
@@ -59,7 +104,6 @@ def create_pdf():
 
     amount = 0
     money = 0
-    rows = equipment.strip().split('\n')
 
     pdf.set_font('TimesNewRoman', '', 8)
     pdf.cell(10, 10, '№', border=1, align='C')
@@ -74,7 +118,7 @@ def create_pdf():
         parts = [p.strip() for p in row.split(',')]
 
         name, unit, q, p = parts
-        total = int(q) * int(p)
+        total = float(q) * float(p)
 
         pdf.set_font('TimesNewRoman', '', 12)
         pdf.cell(10, 8, str(i), border=1, align='C')
@@ -85,8 +129,8 @@ def create_pdf():
         pdf.cell(35, 8, str(total), border=1, align='C')
         pdf.ln()
 
-        amount += int(q)
-        money += int(total)
+        amount += float(q)
+        money += float(total)
 
     pdf.cell(180, 10, txt=f"УСЬОГО: {amount} шт. {money} грн", ln=True)
 
