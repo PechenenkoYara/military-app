@@ -16,6 +16,19 @@ def create_pdf_form():
 @generate_pdf.route('/create_pdf', methods=['POST'])
 def create_pdf():
     date = request.form['date']
+    year, month, day = date.split('-')
+    months = {'01': 'січня',
+    '02': 'лютого',
+    '03': 'березня',
+    '04': 'квітня',
+    '05': 'травня',
+    '06': 'червня',
+    '07': 'липня',
+    '08': 'серпня',
+    '09': 'вересня',
+    '10': 'жовтня',
+    '11': 'листопада',
+    '12': 'грудня'}
     city = request.form['city']
     volunteer_side = request.form['volunteer_side']
     volunteer_name = request.form['volunteer_name']
@@ -33,7 +46,7 @@ def create_pdf():
     pdf.set_font('TimesNewRoman', '', 12)
 
     pdf.cell(200, 10, txt="АКТ приймання-передачі гуманітарної (благодійної) допомоги", ln=True, align='C')
-    pdf.cell(200, 10, txt=f'{date} року', ln=True, align='C')
+    pdf.cell(200, 10, txt=f'"{day}" {months[month]} {year} року', ln=True, align='C')
     pdf.cell(200, 10, txt=f"м. {city}", ln=True, align='C')
     pdf.ln(3)
     usable_width = pdf.w - 2 * pdf.l_margin
