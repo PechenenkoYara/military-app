@@ -67,7 +67,7 @@ def is_name_valid(name: str) -> bool:
     return True
 
 def format_name(name: str) -> str:
-    """Робить першу літеру кожної частини імені великою, інші — маленькими."""
+    """Makes first letter capital"""
     allowed_separators = "-' "
     if len(name) == 1:
         return name.upper()
@@ -89,6 +89,7 @@ def format_name(name: str) -> str:
 
 
 def fix_and_validate_name(name: str) -> str | None:
+    """checks if the name is valid and formats it if needed"""
     name = format_name(name)
     return name if is_name_valid(name) else None
 

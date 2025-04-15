@@ -109,6 +109,7 @@ def sign_up():
 
 
 
+
 @auth.route("/profile")
 @login_required
 def profile():
