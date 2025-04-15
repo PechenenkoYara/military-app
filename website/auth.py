@@ -8,7 +8,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, login_required, logout_user, current_user
 from . import db
 from .models import User, Contacts
-from .data_checking import is_name_valid, is_valid_email, is_password_incorrect, is_valid_phone_number
+from .data_checking import is_name_valid, is_valid_email, is_password_incorrect, is_valid_phone_number, format_name
 from .contact_filter import filter_input, does_fit, CATEGORIES
 
 auth = Blueprint('auth', __name__)
@@ -95,8 +95,8 @@ def sign_up():
         elif password1 != password2:
             flash('Passwords don\'t match.', category='error')
         else:
-            new_user = User(email=email, first_name=first_name, \
-                        last_name=last_name, occupation=occupation,\
+            new_user = User(email=email, first_name=format_name(first_name),
+    last_name=format_name(last_name), occupation=format_name(occupation),\
                         password=generate_password_hash(password1, method='pbkdf2:sha256'))
             db.session.add(new_user)
             db.session.commit()
