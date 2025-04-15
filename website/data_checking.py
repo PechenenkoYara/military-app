@@ -49,8 +49,6 @@ def is_name_valid(name: str) -> bool:
     max_length = 150
     if not name or len(name) > max_length:
         return False
-    if name[0].islower():
-        return False
     if len(name) == 1 and name.isupper():
         return True
 
@@ -68,6 +66,33 @@ def is_name_valid(name: str) -> bool:
             return False
     return True
 
+def format_name(name: str) -> str:
+    """Makes first letter capital"""
+    allowed_separators = "-' "
+    if len(name) == 1:
+        return name.upper()
+    result = ''
+    i = 0
+    while i < len(name):
+        if name[i].isalpha():
+            result += name[i].upper()
+            i += 1
+            while i < len(name) and name[i].isalpha():
+                result += name[i].lower()
+                i += 1
+        elif name[i] in allowed_separators:
+            result += name[i]
+            i += 1
+        else:
+            return name
+    return result
+
+
+def fix_and_validate_name(name: str) -> str | None:
+    """checks if the name is valid and formats it if needed"""
+    name = format_name(name)
+    return name if is_name_valid(name) else None
+
 def is_password_incorrect(password: str):
     """function to meke sure user's password is valid.
     It checks if the password is longer, than 7 characters,
@@ -77,7 +102,7 @@ def is_password_incorrect(password: str):
     special_characters = "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~"
 
     if len(password) < 7:
-        return "Password must contain at least 8 characters"
+        return "Password must contain at least 7 characters"
 
     if ' ' in password:
         return "There can be no spaces in password"
