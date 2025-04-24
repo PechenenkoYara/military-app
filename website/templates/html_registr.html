@@ -28,7 +28,7 @@
             <input type="text" name="last_name" class="input-field" placeholder="прізвище" required>
             <input type="text" name="occupation" class="input-field" placeholder="сфера діяльності">
             <input type="email" name="email" class="input-field" placeholder="email" required>
-            <input type="password" name="password1" class="input-field" placeholder="пароль(має містити мінімум 7 символів серед яких як мінімум літера, одна цифра і один символ що не є літерою чи цифрою)" required>
+            <input type="password" name="password1" class="input-field" placeholder="пароль [a-z, A-Z, 0-9] > 7" required>
             <input type="password" name="password2" class="input-field" placeholder="підтвердження_пароль" required>
             
             {% with messages = get_flashed_messages(with_categories=true) %}
