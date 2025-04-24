@@ -113,9 +113,6 @@ def is_password_incorrect(password: str):
     if not any(ch.isalpha() for ch in password):
         return "Password must include at least one letter"
 
-    if not any(ch in special_characters for ch in password):
-        return "Password must include at least one special character"
-
     if not all(ch.isalnum() or ch in special_characters for ch in password):
         return "Password can only contain letters, digits and common symbols"
 
