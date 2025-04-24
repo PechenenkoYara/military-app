@@ -24,13 +24,13 @@
         <div class="frame-3-13">
           <p class="text-14"><span class="text-white">Реєстрація</span></p>
           <form method="POST" class="frame-3-15">
-            <input type="text" name="first_name" class="input-field" placeholder="імʼя" required>
-            <input type="text" name="last_name" class="input-field" placeholder="прізвище" required>
-            <input type="text" name="occupation" class="input-field" placeholder="сфера діяльності">
-            <input type="email" name="email" class="input-field" placeholder="email" required>
-            <input type="password" name="password1" class="input-field" placeholder="пароль [a-z, A-Z, 0-9] > 7" required>
-            <input type="password" name="password2" class="input-field" placeholder="підтвердження_пароль" required>
-            
+            <input type="text" name="first_name" class="input-field" placeholder="Ім’я" value="{{ user.first_name }}" required>
+            <input type="text" name="last_name" class="input-field" placeholder="Прізвище" value="{{ user.last_name }}" required>
+            <input type="text" name="occupation" class="input-field" placeholder="Сфера діяльності" value="{{ user.occupation }}">
+            <input type="email" name="email" class="input-field" placeholder="Email" value="{{ user.email }}" required>
+            <input type="password" name="password1" class="input-field" placeholder="Пароль [a-z,A-Z,0-9] > 7" required>
+            <input type="password" name="password2" class="input-field" placeholder="Підтвердження пароля" required>
+
             {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
               {% for category, message in messages %}

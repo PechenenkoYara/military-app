@@ -72,6 +72,9 @@ def logout():
 
 @auth.route('/sign-up', methods=['GET', 'POST'])
 def sign_up():
+
+    error = False
+
     if request.method == 'POST':
 
         email = request.form.get('email')
@@ -84,16 +87,22 @@ def sign_up():
         user = User.query.filter_by(email=email).first()
         if user:
             flash('Email already exists.', category='error')
+            error = True
         elif not is_valid_email(email):
             flash("The email inputed is incorrect", category='error')
+            error = True
         elif not is_name_valid(first_name):
             flash("The first name inputed is incorrect", category='error')
+            error = True
         elif not is_name_valid(last_name):
             flash("The last name inputed is incorrect", category='error')
+            error = True
         elif is_password_incorrect(password1):
             flash(is_password_incorrect(password1), category='error')
+            error = True
         elif password1 != password2:
             flash('Passwords don\'t match.', category='error')
+            error = True
         else:
             new_user = User(email=email, first_name=format_name(first_name),
     last_name=format_name(last_name), occupation=format_name(occupation),\
@@ -104,6 +113,10 @@ def sign_up():
             flash('Account created!', category='success')
             return redirect(url_for('views.home'))
 
+    if error:
+        return render_template("html_registr.html", user=User(email=email, first_name=format_name(first_name),
+                    last_name=format_name(last_name), occupation=format_name(occupation),\
+                        password=generate_password_hash(password1, method='pbkdf2:sha256')))
     return render_template("html_registr.html", user=current_user)
 
 
