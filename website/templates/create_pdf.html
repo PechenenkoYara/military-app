@@ -141,58 +141,58 @@
 <form action="/create_pdf" method="post">
   <div class="form-group">
     <label for="date">Дата:</label>
-    <input type="date" name="date" id="date" required>
+    <input type="date" name="date" id="date" value="{{ date or '' }}" required>
   </div>
 
   <div class="form-group">
     <label for="city">Місто:</label>
-    <input type="text" name="city" id="city" placeholder="Введіть місто" required>
+    <input type="text" name="city" id="city"  value="{{ city or '' }}" placeholder="Введіть місто" required>
   </div>
 
   <div class="form-group">
     <label for="volunteer_side">Назва благодійника:</label>
-    <input type="text" name="volunteer_side" id="volunteer_side" required>
+    <input type="text" name="volunteer_side" id="volunteer_side" value="{{ volunteer_side or '' }}" required>
   </div>
 
   <div class="form-group">
     <label for="volunteer_name">Представник благодійника (ПІБ):</label>
-    <input type="text" name="volunteer_name" id="volunteer_name" required>
+    <input type="text" name="volunteer_name" id="volunteer_name" value="{{ volunteer_name or '' }}" required>
   </div>
 
   <div class="form-group">
     <label for="volunteer_position">Посада представника благодійника:</label>
-    <input type="text" name="volunteer_position" id="volunteer_position" required>
+    <input type="text" name="volunteer_position" id="volunteer_position" value="{{ volunteer_position or '' }}" required>
   </div>
 
   <div class="form-group">
     <label for="volunteer_basis">На підставі:</label>
-    <input type="text" name="volunteer_basis" id="volunteer_basis" required>
+    <input type="text" name="volunteer_basis" id="volunteer_basis" value="{{ volunteer_basis or '' }}" required>
   </div>
 
   <div class="form-group">
     <label for="recipient_side">Назва отримувача:</label>
-    <input type="text" name="recipient_side" id="recipient_side" required>
+    <input type="text" name="recipient_side" id="recipient_side" value="{{ recipient_side or '' }}" required>
   </div>
 
   <div class="form-group">
     <label for="recipient_name">Представник отримувача (ПІБ):</label>
-    <input type="text" name="recipient_name" id="recipient_name" required>
+    <input type="text" name="recipient_name" id="recipient_name" value="{{ recipient_name or '' }}" required>
   </div>
 
   <div class="form-group">
     <label for="recipient_position">Посада представника отримувача:</label>
-    <input type="text" name="recipient_position" id="recipient_position" required>
+    <input type="text" name="recipient_position" id="recipient_position" value="{{ recipient_position or '' }}" required>
   </div>
 
   <div class="form-group">
     <label for="recipient_basis">На підставі:</label>
-    <input type="text" name="recipient_basis" id="recipient_basis" required>
+    <input type="text" name="recipient_basis" id="recipient_basis"  value="{{ recipient_basis or '' }}" required>
   </div>
 
   <div class="form-group">
     <label for="items">Перелік матеріальних цінностей:</label>
     <small>Назва, одиниця, кількість, ціна за 1. Один запис на рядок.</small>
-    <textarea name="items" id="items" placeholder="Назва, одиниця, кількість, ціна за 1" required></textarea>
+    <textarea name="items" id="items" placeholder="Назва, одиниця, кількість, ціна за 1" required>{{ items or '' }}</textarea>
   </div>
 
   <button type="submit">Згенерувати PDF</button>
