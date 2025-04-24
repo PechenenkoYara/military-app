@@ -84,7 +84,20 @@ def create_pdf():
             error = True
 
     if error:
-        return redirect(url_for('generate_pdf.create_pdf_form'))
+        # return redirect(url_for('generate_pdf.create_pdf_form'))
+        return render_template('create_pdf.html',
+                            city=city,
+                            volunteer_side=volunteer_side,
+                            volunteer_name=volunteer_name,
+                            volunteer_position=volunteer_position,
+                            volunteer_basis=volunteer_basis,
+                            recipient_side=recipient_side,
+                            recipient_name=recipient_name,
+                            recipient_position=recipient_position,
+                            recipient_basis=recipient_basis,
+                            items=equipment,
+                            date=date)
+
 
     pdf = FPDF()
     pdf.add_page()
