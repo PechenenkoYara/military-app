@@ -59,4 +59,4 @@ file_paths = {'Автомобілі':
     'website/static/files_for_contacts/products.txt'
 }
 
-# read_files_and_categorize(file_paths)
+read_files_and_categorize(file_paths)
