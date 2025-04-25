@@ -1,127 +1,367 @@
-{% extends "base_.html" %}
-{% block title %}Редагувати профіль{% endblock %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Редагувати профіль</title>
+    <style>
+        body {
+            background-color: #EEEEEE;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Mariupol', sans-serif;
+        }
 
-{% block content %}
-<style>
-    body {
-        margin: 0;
-    }
+        /* Navigation bar styling - matching previous page */
+        .title_box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #35581A;
+            padding: 12px 3%;
+            gap: 8px;
+        }
 
-    .upper_box {
-        width: 100%;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        background-color: rgba(238, 238, 238, 1);
-        padding-top: 20px;
-        padding-bottom: 40px; /* Add some bottom padding for content */
-        box-sizing: border-box; /* Include padding in width and height */
-    }
+        .title_a_block {
+            color: #fff;
+            font-size: 1rem;
+            padding: 10px 20px;
+            border-radius: 8px;
+            background-color: #4E7730;
+            transition: background-color 0.3s;
+            text-align: center;
+            min-width: 140px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+            text-decoration: none;
+        }
 
-    .profile_contain {
-        display: flex;
-        align-items: flex-start;
-        justify-content: flex-start;
-        width: 80%;
-        gap: 30px; /* Add space between image and text fields */
-    }
+        .title_a_block:hover {
+            background-color: #5b8742;
+        }
 
-    .profile_contain img {
-        width: 24%;
-        object-fit: cover;
-    }
+        .home_sign_img {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-    .right_frame {
-        flex-grow: 1;
-    }
+        .home_sign_img img {
+            width: 35px;
+            height: 35px;
+        }
 
-    .right_frame p {
-        font-size: 1em;
-        color: #000000;
-        margin-top: 0; /* Adjust top margin */
-        margin-bottom: 0.3em;
-        white-space: nowrap;
-    }
+        /* Form styling */
+        .upper_box {
+            width: 100%;
+            min-height: calc(100vh - 80px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #EEEEEE;
+            padding: 20px 5% 40px;
+            box-sizing: border-box;
+        }
 
-    .right_frame input[type="text"],
-    .right_frame textarea {
-        font-size: 0.9em;
-        color: #000000;
-        padding: 0.5em;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        background-color: rgba(255, 255, 255, 0.7);
-        margin-top: 0;
-        width: 70%;
-        margin-bottom: 1em;
-        box-sizing: border-box; /* Ensure padding doesn't affect width */
-    }
+        .profile_contain {
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+            width: 100%;
+            max-width: 1000px;
+            gap: 30px;
+            flex-wrap: wrap;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
 
-    .right_frame textarea {
-        height: 150px;
-        line-height: 1.6em; /* Adjust line height for readability */
-        overflow: auto;
-        white-space: pre-wrap;
-        text-align: left;
-    }
+        .profile_img {
+            width: 160px; /* фіксована ширина */
+            height: 160px; /* фіксована висота */
+            object-fit: cover;
+            border-radius: 50%;
 
-    .small-button {
-        background: rgba(53, 88, 26, 1);
-        border-radius: 30px;
-        padding: 10px 30px;
-        text-align: center;
-        line-height: normal;
-        font-size: 1em;
-        color: rgba(238, 238, 238, 1);
-        text-decoration: none;
-        display: inline-block;
-        box-sizing: border-box;
-        width: auto;
-        margin-top: 20px;
-        cursor: pointer; /* Add cursor for better UX */
-        border: none; /* Remove default button border */
-    }
+}
 
-    .button-container {
-        width: 80%;
-        display: flex;
-        justify-content: flex-start;
-        margin-left: 0; /* Adjust margin */
-        margin-top: 20px; /* Add some space above the button */
-    }
+        .right_frame {
+            flex-grow: 1;
+            min-width: 250px;
+        }
 
-    .button-container button {
-        margin-right: 10px; /* Add space between buttons if you have more */
-    }
-</style>
-<div class="upper_box">
-    <div class="profile_contain">
-        <img src="{{ image_file }}" alt="Profile Picture">
-        <div class="right_frame">
-            <form method="POST" enctype="multipart/form-data">
-                <p>Прізвище</p>
-                <input type="text" name="last_name" value="{{ current_user.last_name }}" placeholder="{{ current_user.last_name }}">
-                <p>Ім'я</p>
-                <input type="text" name="first_name" value="{{ current_user.first_name }}" placeholder="{{ current_user.first_name }}">
-                <p>Вид діяльності</p>
-                <input type="text" name="occupation" value="{{ current_user.occupation }}" placeholder="{{ current_user.occupation }}">
-                <p>Впишіть старий пароль, щоб встановити новий</p>
-                <input type="text" name="old_password" placeholder="Старий пароль">
-                <p>Новий пароль</p>
-                <input type="text" name="new_password" placeholder="••••••••">
-                <p>Підтвердіть пароль</p>
-                <input type="text" name="check_password" placeholder="••••••••">
-                <p>Про себе</p>
-                <textarea name="notes" placeholder="{{ current_user.notes }}">{{ current_user.notes }}</textarea>
-                <p>Фото профілю</p>
-                <input type="file" name="profile_picture" accept="image/*">
-                <div class="button-container">
-                    <button type="submit" class="small-button">Зберегти зміни</button>
-                    <a href="{{ url_for('auth.profile') }}" class="small-button" style="background: gray;">Скасувати</a>
-                </div>
-            </form>
+        .right_frame p {
+            font-size: 1em;
+            color: #000000;
+            margin-top: 0;
+            margin-bottom: 0.3em;
+            font-weight: 500;
+        }
+
+        .right_frame input[type="text"],
+        .right_frame input[type="file"],
+        .right_frame textarea {
+            font-size: 0.9em;
+            color: #000000;
+            padding: 0.8em;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.7);
+            margin-top: 0;
+            width: 100%;
+            margin-bottom: 1em;
+            box-sizing: border-box;
+        }
+
+        .right_frame textarea {
+            height: 150px;
+            line-height: 1.6em;
+            overflow: auto;
+            white-space: pre-wrap;
+            text-align: left;
+            resize: vertical;
+        }
+
+        .small-button {
+            background: #35581A;
+            border-radius: 10px;
+            padding: 12px 30px;
+            text-align: center;
+            font-size: 1em;
+            color: #EEEEEE;
+            text-decoration: none;
+            display: inline-block;
+            box-sizing: border-box;
+            width: auto;
+            cursor: pointer;
+            border: none;
+            font-weight: 500;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+            transition: background-color 0.3s;
+        }
+
+        .small-button:hover {
+            background: #4E7730;
+        }
+
+        .cancel-button {
+            background: #888888;
+        }
+
+        .cancel-button:hover {
+            background: #777777;
+        }
+
+        .button-container {
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: flex-start;
+            margin-top: 20px;
+        }
+
+        .button-container button,
+        .button-container a {
+            flex: 1;
+            text-align: center;
+            min-width: 140px;
+        }
+
+        /* Mobile Styles */
+        @media screen and (max-width: 768px) {
+            /* Navigation bar mobile styling */
+            .title_box {
+                flex-direction: column;
+                padding: 10px;
+                gap: 12px;
+            }
+            
+            .home_link {
+                display: block;
+                width: 100%;
+                text-align: center;
+                margin-bottom: 5px;
+            }
+            
+            .home_sign_img {
+                margin: 0 auto;
+                width: 38px;
+                height: 38px;
+            }
+            
+            .menu_link {
+                display: block;
+                width: 100%;
+                text-decoration: none;
+            }
+
+            .title_a_block {
+                width: 100%;
+                padding: 14px 10px;
+                font-size: 1rem;
+                margin: 0;
+                border-radius: 10px;
+                display: block;
+                min-height: 24px;
+                line-height: 24px;
+                font-weight: 500;
+                box-sizing: border-box;
+            }
+            
+            .title_a_block:active {
+                background-color: #2d4c16;
+                transform: translateY(1px);
+            }
+
+            /* Form mobile styling */
+            .upper_box {
+                padding: 15px 10px 30px;
+            }
+
+            .profile_contain {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                padding: 20px 15px;
+                border-radius: 12px;
+                gap: 20px;
+            }
+
+            .profile_img {
+                width: 160px; /* фіксована ширина */
+                height: 160px; /* фіксована висота */
+                object-fit: cover;
+                border-radius: 50%;
+            }
+
+            .right_frame {
+                width: 100%;
+            }
+
+            .right_frame p {
+                font-size: 0.95em;
+                text-align: left;
+                margin-bottom: 0.5em;
+                padding-left: 5px;
+            }
+
+            .right_frame input[type="text"],
+            .right_frame input[type="file"],
+            .right_frame textarea {
+                padding: 12px 10px;
+                font-size: 1em;
+                margin-bottom: 15px;
+                border-radius: 6px;
+            }
+
+            .button-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .small-button {
+                width: 100%;
+                padding: 15px 10px;
+                font-size: 1.1em;
+                border-radius: 8px;
+            }
+        }
+
+        /* Extra small devices */
+        @media screen and (max-width: 480px) {
+            .title_box {
+                padding: 8px 5px;
+                gap: 8px;
+            }
+            
+            .title_a_block {
+                padding: 16px 5px;
+                font-size: 1.1rem;
+                margin-bottom: 2px;
+                box-shadow: 0 3px 6px rgba(0,0,0,0.25);
+            }
+            
+            .profile_contain {
+                padding: 15px 12px;
+            }
+            
+            .profile_img {
+                width: 30%;
+                max-width: 100px;
+            }
+            
+            .right_frame p {
+                font-size: 0.9em;
+            }
+            
+            .right_frame input[type="text"],
+            .right_frame input[type="file"],
+            .right_frame textarea {
+                padding: 10px 8px;
+            }
+            
+            /* Ensure file input is more readable on small screens */
+            input[type="file"] {
+                font-size: 0.85em;
+            }
+            
+            .small-button {
+                padding: 14px 10px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar - matching previous page -->
+    <div class="title_box">
+        <a href="/" class="home_link">
+            <div class="home_sign_img">
+                <img src="/static/images/home_sign.png" alt="Home">
+            </div>
+        </a>
+        <a href="contacts" class="menu_link">
+            <div class="title_a_block">Мої контакти</div>
+        </a>
+        <a href="create_pdf_form" class="menu_link">
+            <div class="title_a_block">Створити звіт</div>
+        </a>
+        <a href="edit" class="menu_link">
+            <div class="title_a_block">Редагувати профіль</div>
+        </a>
+    </div>
+
+    <!-- Form Content -->
+    <div class="upper_box">
+        <div class="profile_contain">
+            <img class="profile_img" src="{{ image_file }}" alt="Profile Picture">
+            <div class="right_frame">
+                <form method="POST" enctype="multipart/form-data">
+                    <p>Прізвище</p>
+                    <input type="text" name="last_name" value="{{ current_user.last_name }}" placeholder="{{ current_user.last_name }}">
+                    <p>Ім'я</p>
+                    <input type="text" name="first_name" value="{{ current_user.first_name }}" placeholder="{{ current_user.first_name }}">
+                    <p>Вид діяльності</p>
+                    <input type="text" name="occupation" value="{{ current_user.occupation }}" placeholder="{{ current_user.occupation }}">
+                    <p>Впишіть старий пароль, щоб встановити новий</p>
+                    <input type="text" name="old_password" placeholder="Старий пароль">
+                    <p>Новий пароль</p>
+                    <input type="text" name="new_password" placeholder="••••••••">
+                    <p>Підтвердіть пароль</p>
+                    <input type="text" name="check_password" placeholder="••••••••">
+                    <p>Про себе</p>
+                    <textarea name="notes" placeholder="{{ current_user.notes }}">{{ current_user.notes }}</textarea>
+                    <p>Фото профілю</p>
+                    <input type="file" name="profile_picture" accept="image/*">
+                    <div class="button-container">
+                        <button type="submit" class="small-button">Зберегти зміни</button>
+                        <a href="{{ url_for('auth.profile') }}" class="small-button cancel-button">Скасувати</a>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-</div>
-{% endblock %}
+</body>
+</html>

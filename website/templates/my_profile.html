@@ -1,141 +1,288 @@
-
-<style>
-    body {
-        background-color: #EEEEEE;
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
-        margin: 0;
-        font-family: 'Mariupol', sans-serif;
-    }
-
-    .title_box {
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        background-color: #35581A;
-        padding: 20px 5%;
-        flex-wrap: wrap;
-
-    }
-
-    .title_a_block {
-        color: #fff;
-        font-size: 1rem;
-        margin: 8px 12px;
-        padding: 10px 16px;
-        border-radius: 5px;
-        background-color: #4E7730;
-        transition: background-color 0.3s;
-    }
-
-    .title_a_block:hover {
-        background-color: #5b8742;
-    }
-
-    .home_sign_img img {
-        width: 35px;
-        height: 35px;
-    }
-
-    .upper_box {
-        padding: 60px 5%;
-        background-color: #EEEEEE;
-        flex-grow: 1;
-    }
-
-    .profile_contain {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        gap: 30px;
-        background: white;
-        border-radius: 20px;
-        padding: 30px;
-    }
-
-    .profile_contain img {
-        width: 140px;
-        height: 140px;
-        border-radius: 50%;
-        object-fit: cover;
-        border: 3px solid #35581A;
-    }
-
-    .t1 {
-        font-size: 1.8rem;
-        font-weight: bold;
-        margin: 10px 0 5px;
-        color: #000;
-        font-family: 'Kharkiv Tone', sans-serif;
-    }
-
-    .t2, .t3 {
-        font-size: 1.1rem;
-        margin: 6px 0;
-        color: #333;
-    }
-
-    .t3[style*="opacity"] {
-        color: #888;
-    }
-
-    .bottom-image-container {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        margin-top: 50px;
-        padding-bottom: 30px;
-    }
-
-    .bottom-image-container img {
-        width: 100%;
-        max-width: 800px;
-        height: auto;
-        border-radius: 20px;
-    }
-
-    @media screen and (max-width: 768px) {
-        .title_box {
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профіль користувача</title>
+    <style>
+        body {
+            background-color: #EEEEEE;
+            display: flex;
             flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Mariupol', sans-serif;
+        }
+
+        .title_box {
+            width: 100%;
+            display: flex;
+            justify-content: center;
             align-items: center;
+            background-color: #35581A;
+            padding: 12px 3%;
+            gap: 8px;
+        }
+
+        .title_a_block {
+            color: #fff;
+            font-size: 1rem;
+            padding: 10px 20px;
+            border-radius: 8px;
+            background-color: #4E7730;
+            transition: background-color 0.3s;
+            text-align: center;
+            min-width: 140px;
+            text-decoration: none;
+        }
+
+        .title_a_block:hover {
+            background-color: #5b8742;
+        }
+
+        .home_sign_img {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .home_sign_img img {
+            width: 35px;
+            height: 35px;
+        }
+
+        .upper_box {
+            padding: 20px 4%;
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
         }
 
         .profile_contain {
-            flex-direction: column;
+            display: flex;
+            flex-wrap: wrap;
             align-items: center;
-            text-align: center;
+            justify-content: center;
+            gap: 30px;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 1000px;
+            width: 100%;
         }
 
-        .t1, .t2, .t3 {
-            margin-left: 0;
+        .profile_img {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+
         }
-    }
-</style>
 
-<div class="title_box">
-    <a href="/" class="home_sign_img"><img src="/static/images/home_sign.png" alt="Home"></a>
-    <a href="contacts"><div class="title_a_block">Мої контакти</div></a>
-    <a href="create_pdf_form"><div class="title_a_block">Створити звіт</div></a>
-    <a href="edit"><div class="title_a_block">Редагувати профіль</div></a>
-</div>
+        .profile_info {
+            flex: 1;
+            min-width: 250px;
+        }
 
-<div class="upper_box">
-    <div class="profile_contain">
-        <img src="{{ image_file }}" alt="User Photo">
-        <div>
-            <p class="t1">{{ current_user.last_name }} {{ current_user.first_name }} / {{ current_user.occupation }}</p>
-            <p class="t2">{{ current_user.email }}</p>
-            {% if current_user.notes %}
-                <p class="t3" style="white-space: pre-wrap;">{{ current_user.notes }}</p>
-            {% else %}
-                <p class="t3" style="opacity: 30%;">Про мене ...</p>
-            {% endif %}
+        .t1 {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin: 0 0 10px;
+            color: #000;
+            font-family: 'Kharkiv Tone', sans-serif;
+        }
+
+        .t2 {
+            font-size: 1.1rem;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .t3 {
+            font-size: 1rem;
+            color: #555;
+            white-space: pre-wrap;
+            line-height: 1.5;
+        }
+
+        .t3[style*="opacity"] {
+            color: #aaa;
+            font-style: italic;
+        }
+
+        .bottom-image-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            padding: 0 5% 40px;
+        }
+
+        .bottom-image-container img {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            border-radius: 20px;
+        }
+
+        /* Mobile Styles */
+        @media screen and (max-width: 768px) {
+            .title_box {
+                flex-direction: column;
+                padding: 10px;
+                gap: 1px;
+            }
+            
+            .home_link {
+                display: block;
+                width: 100%;
+                text-align: center;
+                margin-bottom: 5px;
+            }
+            
+            .home_sign_img {
+                margin: 0 auto;
+                width: 38px;
+                height: 38px;
+            }
+            
+            .menu_link {
+                display: block;
+                width: 100%;
+                text-decoration: none;
+            }
+
+            .title_a_block {
+                width: 100%;
+                padding: 14px 10px;
+                font-size: 1rem;
+                margin: 0;
+                border-radius: 10px;
+                display: block;
+                min-height: 24px;
+                line-height: 24px;
+                font-weight: 500;
+                box-sizing: border-box;
+            }
+            
+            .title_a_block:active {
+                background-color: #2d4c16;
+                transform: translateY(1px);
+            }
+
+            .upper_box {
+                padding: 16px 10px;
+            }
+
+            .profile_contain {
+                flex-direction: column;
+                text-align: center;
+                padding: 20px 10px;
+                margin: 0;
+                gap: 15px;
+                border-radius: 10px;
+            }
+
+            .profile_img {
+                width: 90px;
+                height: 90px;
+
+            }
+
+            .profile_info {
+                min-width: unset;
+                width: 100%;
+                padding: 0;
+            }
+
+            .t1 {
+                font-size: 1.2rem;
+                word-wrap: break-word;
+                hyphens: auto;
+                margin-bottom: 8px;
+                padding: 0 5px;
+            }
+
+            .t2 {
+                font-size: 0.9rem;
+                word-break: break-all;
+                padding: 0 5px;
+            }
+
+            .t3 {
+                font-size: 0.85rem;
+                padding: 0 5px;
+            }
+
+            .bottom-image-container {
+                margin-top: 10px;
+                padding: 0 10px 20px;
+            }
+            
+            .bottom-image-container img {
+                border-radius: 10px;
+            }
+        }
+
+        /* Extra small devices */
+        @media screen and (max-width: 480px) {
+            .title_box {
+                padding: 8px 5px;
+                gap: 8px;
+            }
+            
+            .title_a_block {
+                padding: 16px 5px;
+                font-size: 1.1rem;
+                margin-bottom: 2px;
+            }
+            
+            .profile_contain {
+                padding: 15px 5px;
+            }
+            
+            .profile_img {
+                width: 80px;
+                height: 80px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="title_box">
+        <a href="/" class="home_link">
+            <div class="home_sign_img">
+                <img src="/static/images/home_sign.png" alt="Home">
+            </div>
+        </a>
+        <a href="contacts" class="menu_link">
+            <div class="title_a_block">Мої контакти</div>
+        </a>
+        <a href="create_pdf_form" class="menu_link">
+            <div class="title_a_block">Створити звіт</div>
+        </a>
+        <a href="edit" class="menu_link">
+            <div class="title_a_block">Редагувати профіль</div>
+        </a>
+    </div>
+
+    <div class="upper_box">
+        <div class="profile_contain">
+            <img class="profile_img" src="{{ image_file }}" alt="User Photo">
+            <div class="profile_info">
+                <p class="t1">{{ current_user.last_name }} {{ current_user.first_name }} / {{ current_user.occupation }}</p>
+                <p class="t2">{{ current_user.email }}</p>
+                {% if current_user.notes %}
+                    <p class="t3">{{ current_user.notes }}</p>
+                {% else %}
+                    <p class="t3" style="opacity: 30%;">Про мене ...</p>
+                {% endif %}
+            </div>
         </div>
     </div>
-</div>
 
-<div class="bottom-image-container">
-    <img src="/static/images/wish_for_great.png" alt="Wish Banner">
-</div>
-
+    <div class="bottom-image-container">
+        <img src="/static/images/wish_for_great.png" alt="Wish Banner">
+    </div>
+</body>
+</html>
