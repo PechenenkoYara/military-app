@@ -314,6 +314,64 @@
         margin-top: 30px;
       }
     }
+    .developers-section {
+  padding: 40px 20px;
+  background-color: #f7f7f7;
+  text-align: center;
+}
+
+.developers-section h2 {
+  font-size: 28px;
+  margin-bottom: 30px;
+}
+
+.developers-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.developer-card {
+  width: 22%;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  padding: 40px;
+  text-align: center;
+  transition: transform 0.3s;
+}
+
+.developer-card:hover {
+  transform: scale(1.03);
+}
+
+.developer-card img {
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.developer-card p {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+}
+
+/* 📱 Mobile styles */
+@media (max-width: 600px) {
+  .developer-card {
+    width: 90%;
+  }
+
+  .developers-section h2 {
+    font-size: 24px;
+  }
+}
+
   </style>
 </head>
 <body>
@@ -363,6 +421,28 @@
   </div>
   <img src="/static/images/heart.jpg" class="ribbon" alt="Про нас">
 </div>
+
+<section class="developers-section">
+  <h2>Наша команда</h2>
+  <div class="developers-container">
+    <div class="developer-card">
+      <img src="static/images/yara.jpg" alt="Розробник 1">
+      <p>Ярина – розробниця, дизайнер, добре, що не манікюру</p>
+    </div>
+    <div class="developer-card">
+      <img src="static/images/daryna.jpg" alt="Розробник 2">
+      <p>Дарина – розробниця, гуру деплоїнгу та pdf</p>
+    </div>
+    <div class="developer-card">
+      <img src="static/images/katya.jpg" alt="Розробник 3">
+      <p>Катерина – розробниця, фахівець баз данних</p>
+    </div>
+    <div class="developer-card">
+      <img src="static/images/Nastya.jpg" alt="Розробник 4">
+      <p>Анастасія – розробниця, майстриня реджексу</p>
+    </div>
+  </div>
+</section>
 
 <footer>
   <div class="logo-text">волонтерам</div>
