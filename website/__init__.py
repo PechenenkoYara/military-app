@@ -36,6 +36,9 @@ def create_app():
     def load_user(id):
         return User.query.get(int(id))
 
+    from .contact_filter import read_files_and_categorize, file_paths
+    read_files_and_categorize(file_paths)
+
     return app
 
 
