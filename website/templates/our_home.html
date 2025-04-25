@@ -8,15 +8,14 @@
   <style>
     @font-face {
       font-family: 'Kharkiv Tone';
-      src: url('fonts/kharkiv-tone.woff2') format('woff2'),
-           url('fonts/kharkiv-tone.woff') format('woff');
+      src: url('static/fonts/kharkiv-tone.woff') format('woff');
       font-weight: normal;
       font-style: normal;
     }
 
     :root {
       --font-family-kharkiv-tone: 'Kharkiv Tone', sans-serif;
-      --font-family-roboto: 'Roboto', sans-serif;
+      --font-family-roboto: 'Mariupol', sans-serif;
       --text-rgb-53-88-26: rgba(53, 88, 26, 1);
       --text-black: rgba(0, 0, 0, 1);
       --text-white: rgba(255, 255, 255, 1);
@@ -67,6 +66,7 @@
     .hero h1 {
       font-size: 70px;
       margin: 0;
+      font-family: 'Kharkiv Tone', sans-serif;
     }
 
     .hero h2 {
@@ -207,8 +207,8 @@
         flex-direction: column;
         padding: 20px;
         text-align: center;
-      }
 
+      }
       .logo-text {
         font-size: 24px;
         margin-bottom: 10px;
@@ -320,17 +320,16 @@
 
 <header>
   <div class="logo-text">свій до свого по своє</div>
+  <!-- одна кнопка меню -->
   <img src="/static/images/log_in_out.png" class="menu-icon" alt="menu" onclick="toggleMenu()">
-  <ul id="nav-menu">
-    <li>
-      <a href="#"><img src="/static/images/log_in_out.png" class="log_pic" alt="picture"></a>
-      <ul class="dropdown">
-        <li><a href="/login" class="card-text" style="color: #35581A;">Log in</a></li>
-        <li><a href="/sign-up" class="card-text" style="color: #35581A;">Register</a></li>
-        <li><a href="/logout" class="card-text" style="color: #35581A;">Log out</a></li>
-      </ul>
-    </li>
+
+  <!-- меню -->
+  <ul id="nav-menu" class="dropdown hidden">
+    <li><a href="/login" class="card-text" style="color: #35581A;">Log in</a></li>
+    <li><a href="/sign-up" class="card-text" style="color: #35581A;">Register</a></li>
+    <li><a href="/logout" class="card-text" style="color: #35581A;">Log out</a></li>
   </ul>
+
 </header>
 
 <div class="hero-wrapper">
@@ -366,7 +365,7 @@
 </div>
 
 <footer>
-  <div class="logo-text">волонтер_апка</div>
+  <div class="logo-text">волонтерам</div>
 </footer>
 
 <script>
