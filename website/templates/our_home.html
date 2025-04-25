@@ -8,15 +8,14 @@
   <style>
     @font-face {
       font-family: 'Kharkiv Tone';
-      src: url('fonts/kharkiv-tone.woff2') format('woff2'),
-           url('fonts/kharkiv-tone.woff') format('woff');
+      src: url('static/fonts/kharkiv-tone.woff') format('woff');
       font-weight: normal;
       font-style: normal;
     }
 
     :root {
       --font-family-kharkiv-tone: 'Kharkiv Tone', sans-serif;
-      --font-family-roboto: 'Roboto', sans-serif;
+      --font-family-roboto: 'Mariupol', sans-serif;
       --text-rgb-53-88-26: rgba(53, 88, 26, 1);
       --text-black: rgba(0, 0, 0, 1);
       --text-white: rgba(255, 255, 255, 1);
@@ -67,6 +66,7 @@
     .hero h1 {
       font-size: 70px;
       margin: 0;
+      font-family: 'Kharkiv Tone', sans-serif;
     }
 
     .hero h2 {
@@ -207,8 +207,8 @@
         flex-direction: column;
         padding: 20px;
         text-align: center;
-      }
 
+      }
       .logo-text {
         font-size: 24px;
         margin-bottom: 10px;
@@ -310,27 +310,83 @@
       }
 
       .ribbon {
-        width: 90%;
-        margin-top: 30px;
+        display: None;
       }
     }
+    .developers-section {
+  padding: 40px 20px;
+  background-color: #f7f7f7;
+  text-align: center;
+}
+
+.developers-section h2 {
+  font-size: 28px;
+  margin-bottom: 30px;
+}
+
+.developers-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.developer-card {
+  width: 22%;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  padding: 40px;
+  text-align: center;
+  transition: transform 0.3s;
+}
+
+.developer-card:hover {
+  transform: scale(1.03);
+}
+
+.developer-card img {
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.developer-card p {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+}
+
+/* 📱 Mobile styles */
+@media (max-width: 600px) {
+  .developer-card {
+    width: 90%;
+  }
+
+  .developers-section h2 {
+    font-size: 24px;
+  }
+}
+
   </style>
 </head>
 <body>
 
 <header>
   <div class="logo-text">свій до свого по своє</div>
+  <!-- одна кнопка меню -->
   <img src="/static/images/log_in_out.png" class="menu-icon" alt="menu" onclick="toggleMenu()">
-  <ul id="nav-menu">
-    <li>
-      <a href="#"><img src="/static/images/log_in_out.png" class="log_pic" alt="picture"></a>
-      <ul class="dropdown">
-        <li><a href="/login" class="card-text" style="color: #35581A;">Log in</a></li>
-        <li><a href="/sign-up" class="card-text" style="color: #35581A;">Register</a></li>
-        <li><a href="/logout" class="card-text" style="color: #35581A;">Log out</a></li>
-      </ul>
-    </li>
+
+  <!-- меню -->
+  <ul id="nav-menu" class="dropdown hidden">
+    <li><a href="/login" class="card-text" style="color: #35581A;">Log in</a></li>
+    <li><a href="/sign-up" class="card-text" style="color: #35581A;">Register</a></li>
+    <li><a href="/logout" class="card-text" style="color: #35581A;">Log out</a></li>
   </ul>
+
 </header>
 
 <div class="hero-wrapper">
@@ -365,8 +421,30 @@
   <img src="/static/images/heart.jpg" class="ribbon" alt="Про нас">
 </div>
 
+<section class="developers-section">
+  <h2>Наша команда</h2>
+  <div class="developers-container">
+    <div class="developer-card">
+      <img src="static/images/yaryna.jpg" alt="Розробник 1">
+      <p>Ярина – розробниця, дизайнер, добре, що не манікюру</p>
+    </div>
+    <div class="developer-card">
+      <img src="static/images/dasha.jpg" alt="Розробник 2">
+      <p>Дарина – розробниця, гуру деплоїнгу та pdf</p>
+    </div>
+    <div class="developer-card">
+      <img src="static/images/katya.jpg" alt="Розробник 3">
+      <p>Катерина – розробниця, фахівець баз данних</p>
+    </div>
+    <div class="developer-card">
+      <img src="static/images/Nastya.jpg" alt="Розробник 4">
+      <p>Анастасія – розробниця, майстриня реджексу</p>
+    </div>
+  </div>
+</section>
+
 <footer>
-  <div class="logo-text">волонтер_апка</div>
+  <div class="logo-text">волонтерам</div>
 </footer>
 
 <script>
